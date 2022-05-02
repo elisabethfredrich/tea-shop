@@ -1,25 +1,48 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import {
+  BrowserRouter,
+  NavLink,
+  Route,
+  Switch,
+} from "react-router-dom";
 
-function App() {
-  return (
+
+
+class App extends React.Component {
+  render(){ 
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <BrowserRouter>
+          <div style={{display:"flex"}}>
+            <div className='App-header'>
+              <ul style={{listStyleType: 'none'}}>
+
+                <li>
+                  <NavLink exact activeClassName="active" to="/greentea">
+                    Green tea
+                  </NavLink>
+                </li>
+
+              </ul>
+            </div>
+            <Switch>
+              <Route path="/greentea" component={GreenTea} />
+              <Route path="/" component={Home} />
+            </Switch>
+          </div>
+        </BrowserRouter>
     </div>
-  );
+  )};
 }
+
+function Home() {
+  return <h2>Home</h2>;
+}
+
+function GreenTea() {
+  return <h2>green tea</h2>;
+}
+
 
 export default App;
