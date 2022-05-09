@@ -9,7 +9,6 @@ import {
 import ProductList from './components/productList';
 import ProductDetails from './components/productDetails';
 import { CardDeck, Card, Container, Button } from "react-bootstrap";
-import data from './public/data.json'
 
 
 
@@ -19,24 +18,27 @@ class App extends React.Component {
     return (
     <div className="App">
        <BrowserRouter forceRefresh>
-          <div style={{display:"flex"}}>
-            <div className='App-header'>
-              <ul style={{listStyleType: 'none'}}>
-
-                <li>
-                  <NavLink exact activeClassName="active" to="/greentea">
+            <div className="navbar navbar-expand-lg navbar-light">
+              <div className="collapse navbar-collapse">
+              <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                  <NavLink className="nav-link" exact activeClassName="active" to="/home">
+                    Home
+                  </NavLink>
+                </li>
+                <li className="nav-item"> 
+                  <NavLink className="nav-link" exact activeClassName="active" to="/greentea">
                     Green tea
                   </NavLink>
                 </li>
 
               </ul>
             </div>
+            </div>
             <Switch>
               <Route path="/greentea" component={GreenTea} />
-              <Route path="/products/:id" component={()=> <ProductDetails id={product.productId} product={product}/>} />
               <Route path="/" component={Home} />
             </Switch>
-          </div>
         </BrowserRouter>
     </div>
   )};
