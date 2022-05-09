@@ -1,12 +1,12 @@
 import './App.css';
-import React from "react";
+import React from "react"
 import {
   BrowserRouter,
   NavLink,
   Route,
   Switch,
-} from "react-router-dom";
-import {Product} from './components/product.js'
+} from "react-router-dom"
+import Product from './components/product'
 
 
 

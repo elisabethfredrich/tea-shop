@@ -2,10 +2,10 @@ import { CardDeck, Card, Container, Button } from "react-bootstrap";
 
 
 
-export const Product = () => {
+const Product = () => {
     const handleClick = () => {
-        console.log("test");
-      };
+        //console.log("test");
+      
 
     return (
         <Card className="card" style="max-width:8cm;">
@@ -17,5 +17,6 @@ export const Product = () => {
             <Button onClick={() => handleClick}>Read more</Button>
         </Card.Body>
       </Card>
-    )
+    )}
 } 
+export default Product
