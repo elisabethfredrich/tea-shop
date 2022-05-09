@@ -3,18 +3,30 @@ import React from "react";
 import {
     Link
   } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 
-const Product = ({productName,productPrice,productImage}) => {
+  
+
+
+const Product = ({product}) => {
+
+  let history = useHistory();
+  
+  function moveToProductDetails(productName){
+      history.push(`/products/${productName.replaceAll(" ", "")}`)
+  }
+
+
     return (
         <Card className="card">
-        <Card.Img variant="top" img="true" src={productImage} alt="Card image"/>
+        <Card.Img variant="top" img="true" src={product.image} alt="Card image"/>
         <Card.Body>
-            <Card.Title>{productName}</Card.Title>
-            <Card.Text>{productPrice}</Card.Text>
+            <Card.Title>{product.productName}</Card.Title>
+            <Card.Text>{product.price}</Card.Text>
             <Link to="/" className="btn">Home</Link>
             <Button className="btn" onClick={() => console.log("test")}>Add to basket</Button>
-            <Button onClick={() => console.log("test")}>Read more</Button>
+            <Button onClick={() => moveToProductDetails(product.productName)}>Read more</Button>
         </Card.Body>
       </Card>
     )

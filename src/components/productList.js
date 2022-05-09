@@ -7,7 +7,7 @@ const ProductList = ({products}) => {
         <div className="card-container">
         <div className="flex-card-wrapper">
             <CardDeck>
-                {products.map((product) => (<Product key={product.productId} productName={product.productName} productPrice={product.price} productImage={product.image}/>))}
+                {products.map((product) => (<Product key={product.productId} product={product}/>))}
             </CardDeck>
         </div></div>
     )

@@ -2,41 +2,33 @@ import './App.css';
 import React from "react"
 import {
   BrowserRouter,
-  NavLink,
   Route,
   Switch,
 } from "react-router-dom"
 import ProductList from './components/productList';
 import ProductDetails from './components/productDetails';
-import { CardDeck, Card, Container, Button } from "react-bootstrap";
+import { CardDeck, Card, Container, Button, Navbar } from "react-bootstrap";
+import Product from './components/product';
+import NavigationBar from './components/NavigationBar';
 
 
 
 
 class App extends React.Component {
+
   render(){ 
+    const productTest = {"productId":1,"productName":"Sencha tea","categories":["green","conventional","30-50 DKK"],"price":"32 dkk","image":"/img/greenteas/sencha.jpg","description":"Sencha is a mild and soft green tea from China. It is often used in various green tea blends because it is mild and can therefore easily be combined with various ingredients such as fruits, berries and herbs."};
+    const categoriesTest = [{"categoryName":"greentea"}, {"categoryName":"blacktea"}, {"categoryName":"whitetea"}];
+
     return (
     <div className="App">
-       <BrowserRouter forceRefresh>
-            <div className="navbar navbar-expand-lg navbar-light">
-              <div className="collapse navbar-collapse">
-              <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                  <NavLink className="nav-link" exact activeClassName="active" to="/home">
-                    Home
-                  </NavLink>
-                </li>
-                <li className="nav-item"> 
-                  <NavLink className="nav-link" exact activeClassName="active" to="/greentea">
-                    Green tea
-                  </NavLink>
-                </li>
+       <BrowserRouter>
 
-              </ul>
-            </div>
-            </div>
+         <NavigationBar categories={categoriesTest}/>
+        
             <Switch>
               <Route path="/greentea" component={GreenTea} />
+              <Route path="/products/:productId" component={() => <ProductDetails product={productTest}/>} />
               <Route path="/" component={Home} />
             </Switch>
         </BrowserRouter>
@@ -50,8 +42,8 @@ function Home() {
 
 function GreenTea() {
   const products = [
-    {"productId":1,"productName":"Sencha tea","categories":["green","conventional","30-50 DKK"],"price":"32 dkk","image":"./img/greenteas/sencha.jpg","description":"Sencha is a mild and soft green tea from China. It is often used in various green tea blends because it is mild and can therefore easily be combined with various ingredients such as fruits, berries and herbs."},
-  {"productId":2,"productName":"Organic Matcha Tea","categories":["green","organic","30-50 DKK"],"price":"35 dkk","image":"./img/greenteas/matcha.png","description":"Matcha is a fine, green tea powder and is used for the traditional Japanese tea ceremony. Matcha is made from the finest top leaves of the plant and is rich on A-, E- and C vitamins, minerals and polyphenols. It is said that Matcha is even healthier than other teas because the whole tea leaves are used."}]; //the http call should probably go here
+    {"productId":1,"productName":"Sencha tea","categories":["green","conventional","30-50 DKK"],"price":"32 dkk","image":"/img/greenteas/sencha.jpg","description":"Sencha is a mild and soft green tea from China. It is often used in various green tea blends because it is mild and can therefore easily be combined with various ingredients such as fruits, berries and herbs."},
+  {"productId":2,"productName":"Organic Matcha Tea","categories":["green","organic","30-50 DKK"],"price":"35 dkk","image":"/img/greenteas/matcha.png","description":"Matcha is a fine, green tea powder and is used for the traditional Japanese tea ceremony. Matcha is made from the finest top leaves of the plant and is rich on A-, E- and C vitamins, minerals and polyphenols. It is said that Matcha is even healthier than other teas because the whole tea leaves are used."}]; //the http call should probably go here
 
   return (
     <div>
