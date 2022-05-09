@@ -1,22 +1,19 @@
 import { CardDeck, Card, Container, Button } from "react-bootstrap";
+import React from "react";
 
 
-
-const Product = () => {
-    const handleClick = () => {
-        //console.log("test");
-      
-
+const Product = ({productName,productPrice,productImage}) => {
     return (
-        <Card className="card" style="max-width:8cm;">
-        <Card.Img variant="top" src="img/greenteas/matcha.png" alt="Card image"/>
+        <Card className="card">
+        <Card.Img variant="top" src='/img/greenteas/matcha.png' alt="Card image"/>
         <Card.Body>
-            <Card.Title>Organic matcha tea</Card.Title>
-            <Card.Text>35 dkk</Card.Text>
-            <Button onClick={() => handleClick}>Add to basket</Button>
-            <Button onClick={() => handleClick}>Read more</Button>
+            <Card.Title>{productName}</Card.Title>
+            <Card.Text>{productPrice}</Card.Text>
+            <Button onClick={() => console.log("test")}>Add to basket</Button>
+            <Button onClick={() => console.log("test")}>Read more</Button>
         </Card.Body>
       </Card>
-    )}
-} 
-export default Product
+    )
+}
+
+export default Product;
