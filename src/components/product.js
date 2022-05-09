@@ -5,7 +5,7 @@ import React from "react";
 const Product = ({productName,productPrice,productImage}) => {
     return (
         <Card className="card">
-        <Card.Img variant="top" img src='/img/greenteas/matcha.png' alt="Card image"/>
+        <Card.Img variant="top" img="true" src={productImage} alt="Card image"/>
         <Card.Body>
             <Card.Title>{productName}</Card.Title>
             <Card.Text>{productPrice}</Card.Text>

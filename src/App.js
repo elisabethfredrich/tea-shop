@@ -7,7 +7,9 @@ import {
   Switch,
 } from "react-router-dom"
 import ProductList from './components/productList';
+import ProductDetails from './components/productDetails';
 import { CardDeck, Card, Container, Button } from "react-bootstrap";
+import data from './public/data.json'
 
 
 
@@ -31,6 +33,7 @@ class App extends React.Component {
             </div>
             <Switch>
               <Route path="/greentea" component={GreenTea} />
+              <Route path="/products/:id" component={()=> <ProductDetails id={product.productId} product={product}/>} />
               <Route path="/" component={Home} />
             </Switch>
           </div>

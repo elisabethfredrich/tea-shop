@@ -4,9 +4,12 @@ import Product from './product';
 
 const ProductList = ({products}) => {
     return (
-        <CardDeck>
-            {products.map((product) => (<Product key={product.productId} productName={product.productName} productPrice={product.price} productImage={product.image}/>))}
-        </CardDeck>
+        <div className="card-container">
+        <div className="flex-card-wrapper">
+            <CardDeck>
+                {products.map((product) => (<Product key={product.productId} productName={product.productName} productPrice={product.price} productImage={product.image}/>))}
+            </CardDeck>
+        </div></div>
     )
 }
 
