@@ -6,6 +6,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
+import {Product} from './components/product.js'
 
 
 
@@ -13,7 +14,7 @@ class App extends React.Component {
   render(){ 
     return (
     <div className="App">
-       <BrowserRouter>
+       <BrowserRouter forceRefresh>
           <div style={{display:"flex"}}>
             <div className='App-header'>
               <ul style={{listStyleType: 'none'}}>
@@ -41,7 +42,12 @@ function Home() {
 }
 
 function GreenTea() {
-  return <h2>green tea</h2>;
+  return (
+    <div>
+      <h2>green tea</h2>
+      <Product/>
+      </div>
+  );
 }
 
 
