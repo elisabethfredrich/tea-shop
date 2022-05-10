@@ -1,10 +1,9 @@
 import './App.css';
 import React from "react"
-import {BrowserRouter, Route, Switch, NavLink} from "react-router-dom"
+import {BrowserRouter, Route, Switch, NavLink, Link} from "react-router-dom"
 import ProductList from './components/productList';
 import ProductDetails from './components/productDetails';
-import {withRouter} from 'react-router';
-import { Nav, Navbar } from "react-bootstrap";
+import NavigationBar from './components/NavigationBar';
 
 
 class App extends React.Component {
@@ -17,40 +16,14 @@ class App extends React.Component {
     <div className="App">
        <BrowserRouter>
         <div>
-                    <div id="logo-top-container"><a className="navbar-brand-top" href="/">
-                        <img src="/img/Logo.png" alt="logo"/>
-                      </a></div>
+              <NavigationBar categories={categoriesTest}/>
 
-                    <div className="navbar navbar-expand-lg navbar-light">
-                      <div className="collapse navbar-collapse">
-                        <ul className="navbar-nav mr-auto">
-                        {categoriesTest.map((category)=>(
-                              <li className="nav-item" key={category.categoryName}>
-                              <NavLink className="nav-link" exact activeClassName="active" to={`/${category.categoryName.replaceAll(" ","")}`}>
-                                {category.categoryName}
-                              </NavLink>
-                            </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div id="icons-nav">
-                      <div className="search"><a type="submit" href="/search">
-                          <img src="/img/icons/search.png" alt="search"/>
-                    </a></div>
-
-                    <div className="Login"><a href="login">
-                        <img src="/img/icons/profile.png" alt="login"/>
-                    </a></div>
-
-                    <div className="Basket"><div> 
-                      <a href="/basket"><img src="/img/icons/basket.png" alt="basket"/> </a></div>
-                    <a href="/basket"><div id="basketSize"></div></a></div>
-                    </div>
-                    </div>
               <Switch>
-                <Route path="/:category" component={GreenTea} /> {/* change later*/}
+                <Route path="/login" component={Login} />
+                <Route path="/basket" component={Basket} />
+                <Route path="/search" component={Search} />
                 <Route path="/products/:productId" component={() => <ProductDetails product={productTest}/>} />
+                <Route path="/:category" component={GreenTea} /> {/* change later*/}
                 <Route exact path="/" component={Home} />
               </Switch>
             </div>
@@ -74,6 +47,18 @@ function GreenTea() {
         <ProductList products={products}/>
       </div>
   );
+}
+
+function Login() {
+  return <h2>Login</h2>;
+}
+
+function Basket() {
+  return <h2>Basket</h2>;
+}
+
+function Search() {
+  return <h2>Search</h2>;
 }
 
 
