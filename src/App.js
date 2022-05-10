@@ -1,36 +1,32 @@
 import './App.css';
 import React from "react"
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-} from "react-router-dom"
+import {BrowserRouter, Route, Switch, NavLink, Link} from "react-router-dom"
 import ProductList from './components/productList';
 import ProductDetails from './components/productDetails';
-import { CardDeck, Card, Container, Button, Navbar } from "react-bootstrap";
-import Product from './components/product';
 import NavigationBar from './components/NavigationBar';
-
-
 
 
 class App extends React.Component {
 
   render(){ 
     const productTest = {"productId":1,"productName":"Sencha tea","categories":["green","conventional","30-50 DKK"],"price":"32 dkk","image":"/img/greenteas/sencha.jpg","description":"Sencha is a mild and soft green tea from China. It is often used in various green tea blends because it is mild and can therefore easily be combined with various ingredients such as fruits, berries and herbs."};
-    const categoriesTest = [{"categoryName":"greentea"}, {"categoryName":"blacktea"}, {"categoryName":"whitetea"}];
+    const categoriesTest = [{"categoryName":"Green tea"}, {"categoryName":"Black tea"}, {"categoryName":"White tea"},{"categoryName":"Herbal tea"},{"categoryName":"Rooibos tea"}];
 
     return (
     <div className="App">
        <BrowserRouter>
+        <div>
+              <NavigationBar categories={categoriesTest}/>
 
-         <NavigationBar categories={categoriesTest}/>
-        
-            <Switch>
-              <Route path="/greentea" component={GreenTea} />
-              <Route path="/products/:productId" component={() => <ProductDetails product={productTest}/>} />
-              <Route path="/" component={Home} />
-            </Switch>
+              <Switch>
+                <Route path="/login" component={Login} />
+                <Route path="/basket" component={Basket} />
+                <Route path="/search" component={Search} />
+                <Route path="/products/:productId" component={() => <ProductDetails product={productTest}/>} />
+                <Route path="/:category" component={GreenTea} /> {/* change later*/}
+                <Route exact path="/" component={Home} />
+              </Switch>
+            </div>
         </BrowserRouter>
     </div>
   )};
@@ -51,6 +47,18 @@ function GreenTea() {
         <ProductList products={products}/>
       </div>
   );
+}
+
+function Login() {
+  return <h2>Login</h2>;
+}
+
+function Basket() {
+  return <h2>Basket</h2>;
+}
+
+function Search() {
+  return <h2>Search</h2>;
 }
 
 
