@@ -1,4 +1,4 @@
-import { CardDeck, Card, Container, Button } from "react-bootstrap";
+import { CardDeck } from "react-bootstrap";
 import React from "react";
 import Product from './product';
 

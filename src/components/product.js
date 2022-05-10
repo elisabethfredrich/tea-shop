@@ -1,13 +1,7 @@
-import { CardDeck, Card, Container, Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import React from "react";
-import {
-    Link
-  } from "react-router-dom"
+import {Link} from "react-router-dom"
 import { useHistory } from "react-router-dom";
-
-
-  
-
 
 const Product = ({product}) => {
 
@@ -16,7 +10,6 @@ const Product = ({product}) => {
   function moveToProductDetails(productName){
       history.push(`/products/${productName.replaceAll(" ", "")}`)
   }
-
 
     return (
         <Card className="card">
@@ -27,6 +20,9 @@ const Product = ({product}) => {
             <Link to="/" className="btn">Home</Link>
             <Button className="btn" onClick={() => console.log("test")}>Add to basket</Button>
             <Button onClick={() => moveToProductDetails(product.productName)}>Read more</Button>
+
+            {/* Another way to make the buttons: */}
+            {/* <Link className="btn" to={`/products/${product.productName.replaceAll(" ", "")}`}>Read more</Link> */}
         </Card.Body>
       </Card>
     )
