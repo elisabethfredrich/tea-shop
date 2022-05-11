@@ -1,4 +1,3 @@
-import './App.css';
 import React from "react"
 import {BrowserRouter, Route, Switch, NavLink, Link} from "react-router-dom"
 import ProductDetails from './components/productDetails';
