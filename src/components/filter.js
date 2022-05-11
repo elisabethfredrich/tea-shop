@@ -1,32 +1,39 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { useState } from 'react';
 
 
 
 const Filter = ({handler}) => {
+  
+  const FilterButton = ({filter}) => {
     return (
+      <button className="btn btn-1"  onClick={ () => handler(`${filter}`)} >{filter}</button>
+    )
+  }
 
+  const FilterOption = ({filter}) => {
+    return (
+      <option className="btn" value={`${filter}`}>
+            {filter}
+          </option>
+    )
+  }
+
+    return (
         <div id="myBtnContainer">
-        <h5>Filters</h5>
-        <button className="btn btn-1 active" >Show all</button>
-        <button className="btn btn-1">Organic teas</button>
-        <button className="btn btn-1"  onClick={ () => handler("organic")} >Conventional teas</button>
-      
-        <p>Price</p>
-        <select className="form-select" id="form-select" aria-label="Default select example">
-          <option selected value="all">
-            select price range
-          </option>
-          <option className="btn" value="10-29">
-            10 – 29 dkk
-          </option>
-          <option className="btn" value="30-50">
-            30 – 50 dkk
-          </option>
-          <option className="btn" value="51-70">
-            51 – 70 dkk
-          </option>
-        </select>
+          <h5>Filters</h5>
+          <FilterButton filter="show all"/>
+          <FilterButton filter="organic"/>
+          <FilterButton filter="conventional"/>
+        
+          <p>Price</p>
+          <select className="form-select" id="form-select" onChange={(val) => handler(val.target.value)}>
+            <option value="show all">select price range</option>
+            <FilterOption filter="10-29 DKK" />
+            <FilterOption filter="30-50 DKK"/>
+            <FilterOption filter="51-70 DKK"/>
+          </select>
       </div>    
     )
 }
