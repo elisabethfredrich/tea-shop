@@ -14,9 +14,12 @@ const NavigationBar = (categories) => {
       <div className="navbar navbar-expand-lg navbar-light">
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
+
+      
           {categoriesTest.map((category)=>(
                 <li className="nav-item" key={category.categoryName}>
-                <Link className="nav-link" exact activeClassName="active" to={`/${category.categoryName.replaceAll(" ","")}`}>
+                  {/* The following to={...} defines the path for each category menu button. Right now it will be /white, /black and so on */}
+                <Link className="nav-link" exact activeClassName="active" to={`/${category.categoryName.replaceAll(" tea","")}`}>
                   {category.categoryName}
                 </Link>
               </li>

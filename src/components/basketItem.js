@@ -7,7 +7,7 @@ const BasketItem = ({product}) => {
             <th scope="row"><img className="basket-img" src={product.image}/></th>
             <td>{product.productName}</td>
             <td>{product.price}</td>
-            <td><Link href="/basket" class="btn"> Delete from basket</Link></td>
+            <td><Link to="/basket" class="btn"> Delete from basket</Link></td>
         </tr>
     )
 }

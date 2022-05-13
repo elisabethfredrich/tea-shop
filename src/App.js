@@ -27,7 +27,7 @@ class App extends React.Component {
                 <Route path="/basket" component={() => <Basket basketList={productsTest}/>} />
                 <Route path="/search" component={Search} />
                 <Route path="/products/:productId" component={() => <ProductDetails product={productTest}/>} />
-                <Route path="/:category" component={() => <TeaOverview category={categoryTest}/>} />
+                <Route path="/:category" component={() => <TeaOverview/>} />
                 <Route exact path="/" component={Home} />
               </Switch>
 
