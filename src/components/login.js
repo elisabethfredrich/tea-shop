@@ -67,17 +67,17 @@ const LoginForm = () =>{
                 <div className="ui form">
                     <div className="field">
                         <label>First name</label>
-                        <input type="text" name="firstname" placeholde ="Firstname" value={formValues.firstname} onChange={handleChange}/>
+                        <input type="text" name="firstname" placeholder="Firstname" value={formValues.firstname} onChange={handleChange}/>
                     </div>
                     <p>{formErrors.firstname}</p>
                     <div className="field">
                         <label>Last name</label>
-                        <input type="text" name="lastname" placeholde ="Lastname" value={formValues.lastname} onChange={handleChange}/>
+                        <input type="text" name="lastname" placeholder="Lastname" value={formValues.lastname} onChange={handleChange}/>
                     </div>
                     <p>{formErrors.lastname}</p>
                     <div className="field">
                         <label>Email</label>
-                        <input type="email" name="email" placeholde ="Email" value={formValues.email} onChange={handleChange}/>
+                        <input type="email" name="email" placeholder="Email" value={formValues.email} onChange={handleChange}/>
                     </div>
                     <p>{formErrors.email}</p>
                 <button className="submitbutton">Submit</button>
