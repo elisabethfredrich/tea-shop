@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import { Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+
+
 
 const LoginForm = () =>{
     const initialValues = { firstName: "", lastName: "", email: "" };
@@ -47,9 +49,17 @@ const LoginForm = () =>{
       return errors; 
     };
     
-  
+ 
+    const history = useHistory();
+
     return (
       <div className="container">
+             {Object.keys(formErrors).length === 0 && isSubmit ? (
+        <div className="ui message success">Signed in successfully</div>
+      ) : (
+        <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
+      )}
+
     
         <form onSubmit={handleSubmit}>
           <h1>Login Form</h1>
@@ -89,7 +99,8 @@ const LoginForm = () =>{
             </div>
             <p>{formErrors.email}</p>
             <button type="submit">Submit</button>
-            <button input type="reset">Cancel</button>
+            <button type="reset">Canel</button>
+            
           </div>
         </form>
       </div>
