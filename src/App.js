@@ -6,7 +6,7 @@ import Footer from './components/footer';
 import TeaOverview from './components/TeaOverview';
 import Basket from './components/basket';
 import LoginForm from './components/login'
-import Form from './components/login2'
+
 
 
 class App extends React.Component {
@@ -25,7 +25,7 @@ class App extends React.Component {
               <NavigationBar categories={categoriesTest}/>
 
               <Switch>
-                <Route path="/login" component={Form} />
+                <Route path="/login" component={LoginForm} />
                 <Route path="/basket" component={() => <Basket basketList={productsTest}/>} />
                 <Route path="/search" component={Search} />
 
