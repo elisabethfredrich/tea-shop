@@ -1,6 +1,6 @@
 import ProductList from './productList';
 import React from "react";
-import Filter from './Filter';
+import Filter from './filter';
 import Product from './product';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
