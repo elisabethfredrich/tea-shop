@@ -5,7 +5,10 @@ import NavigationBar from './components/NavigationBar';
 import Footer from './components/footer';
 import TeaOverview from './components/TeaOverview';
 import Basket from './components/basket';
-import LoginForm from './components/login'
+import LoginForm from './components/login';
+import Home from './components/home';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 
 
 
@@ -44,9 +47,9 @@ class App extends React.Component {
   )};
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
+// function Home() {
+//   return <h2>Home</h2>;
+// }
 
 function Login() {
   return <h2>Login</h2>;

@@ -17,7 +17,7 @@ const LoginForm = () =>{
 
    
   
-    const handleSubmit = (e) => {
+    const HandleSubmit = (e) => {
       e.preventDefault();
       setFormErrors(validate(formValues));
       setIsSubmit(true);
@@ -76,7 +76,7 @@ const LoginForm = () =>{
     return (
       <div className="container">
     
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={HandleSubmit}>
           <h1>Registration</h1>
           <div className="ui divider"></div>
           <div className="ui form">
@@ -115,7 +115,7 @@ const LoginForm = () =>{
             <p>{formErrors.email}</p>
             {!isSubmit && <button>Submit</button>}
             {isSubmit && <button disabled>adding registration...</button>}
-            <button onClick={() => history.push(`/`)}>Cancel</button>
+            <button onClick={history.goBack}>Cancel</button>
             
           </div>
         </form>
