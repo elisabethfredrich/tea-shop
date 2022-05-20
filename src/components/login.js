@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-
-
+import { Button } from "react-bootstrap";
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 
 const LoginForm = () =>{
     const initialValues = { firstName: "", lastName: "", email: "" };
@@ -14,19 +14,36 @@ const LoginForm = () =>{
       const { name, value } = e.target;
       setFormValues({ ...formValues, [name]: value });
     };
+
+   
   
     const handleSubmit = (e) => {
       e.preventDefault();
       setFormErrors(validate(formValues));
       setIsSubmit(true);
-    };
   
+    
+       fetch(`http://localhost:9000/customers`,{
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(formValues)
+      }).then(()=>{
+        console.log('new customer added')
+        setIsSubmit(false);
+      })
+    
+  
+   
+   
+
     useEffect(() => {
       console.log(formErrors);
       if (Object.keys(formErrors).length === 0 && isSubmit) {
         console.log(formValues);
       }
     }, [formErrors]);
+
+
     const validate = (values) => {
       const errors = {};
       const regexNames = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
@@ -48,21 +65,19 @@ const LoginForm = () =>{
       }  
       return errors; 
     };
+    }  
     
- 
+
     const history = useHistory();
+
+
+    
 
     return (
       <div className="container">
-             {Object.keys(formErrors).length === 0 && isSubmit ? (
-        <div className="ui message success">Signed in successfully</div>
-      ) : (
-        <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
-      )}
-
     
         <form onSubmit={handleSubmit}>
-          <h1>Login Form</h1>
+          <h1>Registration</h1>
           <div className="ui divider"></div>
           <div className="ui form">
             <div className="field">
@@ -98,8 +113,9 @@ const LoginForm = () =>{
               />
             </div>
             <p>{formErrors.email}</p>
-            <button type="submit">Submit</button>
-            <button type="reset">Canel</button>
+            {!isSubmit && <button>Submit</button>}
+            {isSubmit && <button disabled>adding registration...</button>}
+            <button onClick={() => history.push(`/`)}>Cancel</button>
             
           </div>
         </form>
