@@ -8,20 +8,20 @@ const Home = () => {
   const images = [
     {
       img:
-        "/public/img/pouring_tea.jpg",
+        "img/pouring_tea.jpg",
     },
     {
       img:
-        "/public/img/Enjoy.jpg",
+        "img/Enjoy.jpg",
     },
     {
       img:
-        "/public/img/fresh_tea_leaves.jpg",
+        "img/fresh_tea_leaves.jpg",
     //   targetURL: "..."
     },
     {
       img:
-        "/public/img/go green on St. Patrick's.png",
+        "img/go green on St. Patrick's.png",
     //   targetURL: "..."
     }
   ];
