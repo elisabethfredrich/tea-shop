@@ -7,42 +7,40 @@ const Home = () => {
   const history = useHistory();
   const images = [
     {
-      img:
-        "img/pouring_tea.jpg",
+      img: "img/pouring_tea.jpg",
+      id: 1
     },
     {
-      img:
-        "img/Enjoy.jpg",
-        targetURL: "/:category"
+      img: "img/Enjoy.jpg",
+      id: 2,
+      targetURL: "/black"
     },
     {
-      img:
-        "img/fresh_tea_leaves.jpg",
-        
+      img: "img/fresh_tea_leaves.jpg",
+      id: 3  
     },
     {
-      img:
-        "img/go green on St. Patrick's.png",
-    //   targetURL: "..."
+      img: "img/go-green.png",
+      targetURL: "/products/2",
+      id: 4
     }
   ];
   return (
     <div className="App">
-      <Router>
         <Carousel autoPlay infiniteLoop showArrows={true} showThumbs={false}>
           {images.map((item) => (
-            <div
+            <div key={item.id}
               onClick={() => {
                 history.push(item.targetURL);
               }}
+              style={{cursor: "pointer"}}
             >
                 <div>
-                <img src={item.img}/>
+                <img src={item.img} alt="carousel image"/>
                 </div>
             </div>
           ))}
         </Carousel>
-      </Router>
     </div>
   );
 }
