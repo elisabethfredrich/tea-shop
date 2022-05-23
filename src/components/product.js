@@ -13,6 +13,7 @@ const Product = ({product}) => {
 
   function moveProductToBasket(productId){
    fetch(`http://localhost:9000/baskets/${productId}/products`,{
+      mode: 'no-cors',
       method:'POST', 
       headers: {"Content-Type": "application/json"}, 
       body: JSON.stringify(productId)
