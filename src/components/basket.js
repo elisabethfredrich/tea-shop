@@ -3,7 +3,7 @@ import BasketItem from './basketItem';
 
 const Basket = ({basketList}) => {
     return (
-        <table class="table">
+        <table className="table">
         <thead>
           <tr>
             <th scope="col"></th>

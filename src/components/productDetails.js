@@ -35,15 +35,15 @@ const ProductDetails = () => {
         
     return (
         <div>
-        <div class="product-image">
+        <div className="product-image">
             <img src={product.image} alt="Card image" />
           </div>
-          <div class="product-description">
-            <h4 class="product-title">{product.productName}</h4>
-            <p class="card-text">
+          <div className="product-description">
+            <h4 className="product-title">{product.productName}</h4>
+            <p className="card-text">
                 {product.description}
             </p>
-            <p class="card-text">{product.price}</p>
+            <p className="card-text">{product.price}</p>
         
             <Button onclick={()=> console.log()}>Add to basket</Button>
               </div>
