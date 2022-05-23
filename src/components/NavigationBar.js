@@ -19,7 +19,7 @@ const NavigationBar = (categories) => {
           {categoriesTest.map((category)=>(
                 <li className="nav-item" key={category.categoryName}>
                   {/* The following to={...} defines the path for each category menu button. Right now it will be /white, /black and so on */}
-                <Link className="nav-link" exact="true" activeclassname="active" to={`/${category.categoryName.replaceAll(" tea","")}`}>
+                <Link className="nav-link" activeclassname="active" to={`/${category.categoryName.replaceAll(" tea","")}`}>
                   {category.categoryName}
                 </Link>
               </li>
