@@ -27,6 +27,7 @@ a {
 
 /* Index carousel*/
 .carousel {
+  
   display: block;
   height: 80vh;
   overflow: hidden;

@@ -12,7 +12,7 @@ const TeaOverview = () => {
   const [apiResponse, setState] = useState([]);
 
   const callAPI = () => {
-    fetch(`http://localhost:9000/products/productCategories/${category.toLowerCase()}`, { 
+    fetch(`http://localhost:9000/products/${category.toLowerCase()}`, { 
                 method : "GET",
                 mode: 'cors'
             })

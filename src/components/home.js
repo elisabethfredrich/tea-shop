@@ -13,11 +13,12 @@ const Home = () => {
     {
       img:
         "img/Enjoy.jpg",
+        targetURL: "/:category"
     },
     {
       img:
         "img/fresh_tea_leaves.jpg",
-    //   targetURL: "..."
+        
     },
     {
       img:
@@ -35,7 +36,9 @@ const Home = () => {
                 history.push(item.targetURL);
               }}
             >
-                <img src={item.img} alt="image"/>
+                <div>
+                <img src={item.img}/>
+                </div>
             </div>
           ))}
         </Carousel>

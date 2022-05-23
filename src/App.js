@@ -7,9 +7,13 @@ import TeaOverview from './components/TeaOverview';
 import Basket from './components/basket';
 import LoginForm from './components/login';
 import Home from './components/home';
+import About from "./components/about";
+import Terms from "./components/terms";
+import Privacy from "./components/privacy";
+import Contact from "./components/contact";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-
+import "./style.css";
 
 
 class App extends React.Component {
@@ -38,6 +42,7 @@ class App extends React.Component {
                 that it knows to update the TeaOverviw based on that. Solution found here: https://stackoverflow.com/questions/62836374/react-router-does-not-update-component-if-url-parameter-changes */}
                 <Route path="/:category" render={(props) => ( <TeaOverview key={props.match.params.category} {...props} />)} />
                 <Route exact path="/" component={Home} />
+                {/* <Route path="/about" component= {About}/> */}
               </Switch>
 
               <Footer/>
