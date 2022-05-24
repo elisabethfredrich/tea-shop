@@ -67,7 +67,6 @@ active {
         <Card.Body>
             <Card.Title>{product.productName}</Card.Title>
             <Card.Text>{product.price}</Card.Text>
-            <Link to="/" className="btn">Home</Link>
             <Button onClick={() => handleClickAndMakeBasket(product.productId)}>Add to basket</Button>
             <Button onClick={() => moveToProductDetails(product.productId)}>Read more</Button>
 
