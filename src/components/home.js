@@ -21,8 +21,9 @@ const Home = () => {
     },
     {
       img: "img/go-green.png",
-      targetURL: "/products/2",
-      id: 4
+      id: 4,
+      targetURL: "/products/2"
+      
     }
   ];
   return (
@@ -33,7 +34,7 @@ const Home = () => {
               onClick={() => {
                 history.push(item.targetURL);
               }}
-              style={{cursor: "pointer"}}
+              style={{cursor: item.targetURL !== undefined? "pointer" : ""}}
             >
                 <div>
                 <img src={item.img} alt="carousel image"/>
