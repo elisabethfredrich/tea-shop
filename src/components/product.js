@@ -3,11 +3,33 @@ import React from "react";
 import {Link} from "react-router-dom"
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
+import styled from "styled-components";
 
 const Product = ({product}) => {
 
   let history = useHistory();
   
+  const Button = styled.button`
+  
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  margin: 0.2rem;
+  color: black;
+/* Add a light grey background on mouse-over */
+:hover{
+  background-color: #ddd;
+}
+/* Add a dark background to the active button */
+active {
+  background-color: #666;
+  color: white;
+}
+`;
+
 
   function moveToProductDetails(productId){
       history.push(`/products/${productId}`)
