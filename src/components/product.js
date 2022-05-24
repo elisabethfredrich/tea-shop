@@ -38,7 +38,7 @@ active {
   const[userId, setUserId] = useState('1000');
   const[products, setProducts] = useState('');
 
-  const handleClickAndMakeBasket = (productId) => {
+  const createBasketAndAddProductForAnonymousUser = (productId) => {
     const basket = {userId, products:[{productId}]};
 
     fetch('http://localhost:9000/baskets', {
@@ -67,7 +67,7 @@ active {
         <Card.Body>
             <Card.Title>{product.productName}</Card.Title>
             <Card.Text>{product.price}</Card.Text>
-            <Button onClick={() => handleClickAndMakeBasket(product.productId)}>Add to basket</Button>
+            <Button onClick={() => createBasketAndAddProductForAnonymousUser(product.productId)}>Add to basket</Button>
             <Button onClick={() => moveToProductDetails(product.productId)}>Read more</Button>
 
             {/* Another way to make the buttons: */}
