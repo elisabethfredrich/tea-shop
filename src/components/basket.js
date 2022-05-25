@@ -22,13 +22,39 @@ const Basket = ({user}) => {
     ;
 }
 
+const getProduct=(product) => {
+  fetch(`http://localhost:9000/products/${product.productId}`, {
+    method: "GET",
+    headers: {"Content-Type": "application/json"},
+    mode: 'cors'
+  })
+    .then(res => res.json())
+    .then(res=> {
+      let test = apiResponse;
+      test.push(res);
+      setState(test)
+    }
+      )
+  ;
+}
+
+
   useEffect(() => {
+    if(user===undefined){
+      const basketArray = JSON.parse(localStorage.getItem("basket"));
+      basketArray.forEach(product => {
+        getProduct(product)
+      });
+      //setState(basketArray);
+      return;
+    }
     callAPI();
   }, [])
 
   useEffect(()=>{
     setList(apiResponse);
   },[apiResponse])
+
 
 
   const initialState = apiResponse;

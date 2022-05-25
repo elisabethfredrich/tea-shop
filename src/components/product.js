@@ -34,9 +34,37 @@ active {
   function moveToProductDetails(productId){
       history.push(`/products/${productId}`)
   }
+  
+  // const [basketArray,updateBasket] = useState([]);
 
+  // const getProduct=(product) => {
+  //   fetch(`http://localhost:9000/products/${product.productId}`, {
+  //     method: "GET",
+  //     headers: {"Content-Type": "application/json"},
+  //     mode: 'cors'
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       let test = basketArray;
+  //       test.push(res);
+  //       updateBasket(test);
+  //     })
+
+  //   ;
+  // }
   
   function addProductToBasket(productId){
+    if(user===undefined){
+      let array = JSON.parse(localStorage.getItem("basket"))
+      if(array===null) {array = []}
+
+      array.push({productId:productId})
+
+      console.log(array);
+      localStorage.setItem("basket", JSON.stringify(array));
+      return;
+    }
+
     const product = {productId: productId};
     fetch(`http://localhost:9000/baskets/${user.customerId}/products`,{
        method:'POST', 
