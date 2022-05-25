@@ -2,6 +2,18 @@ import React from "react";
 import BasketItem from './basketItem';
 
 const Basket = ({basketList}) => {
+
+
+/*  let basketPost = () =>{
+   isSubmit ? 
+ }
+  {isSubmit ? "Make a Post for an non registered user - else get the state of the userID"}
+ */
+
+
+const onRemove = (product) => {
+  
+}
     return (
         <table className="table">
         <thead>

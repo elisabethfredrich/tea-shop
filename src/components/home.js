@@ -2,8 +2,48 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Link, useHistory } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import React from "react"
+import { useState, useContext } from 'react';
+import { userContext } from "./userContext";
 
 const Home = () => {
+
+
+  const msg = useContext(userContext); 
+
+  const [isSubmit, setIsSubmit, formValues, setFormValues] = useContext(userContext); 
+  /* const [isSubmit, setIsSubmit] = useState(false);
+  const [formValues, setFormValues] = useState(" ");
+   */
+  
+  
+  const userName = () =>{
+      return formValues.firstName
+    } 
+  
+  
+  let userGreeting = () =>{
+      return <h1>Welcome to the world of ITEa!</h1>
+  }; 
+  
+  let guestGreeting = () =>{
+      return <h1>Hello </h1>
+  }
+  
+  let greeting = (isSubmit) =>{
+      if (isSubmit){
+          return userGreeting
+      }
+      else{
+          return guestGreeting
+      }
+  }; 
+  
+  
+  
+
+
+
   const history = useHistory();
   const images = [
     {
@@ -28,6 +68,10 @@ const Home = () => {
   ];
   return (
     <div className="App">
+       <div>
+    Home
+    <div>{greeting}</div>
+    </div>
         <Carousel autoPlay infiniteLoop showArrows={true} showThumbs={false}>
           {images.map((item) => (
             <div key={item.id}
@@ -44,5 +88,9 @@ const Home = () => {
         </Carousel>
     </div>
   );
+
+
 }
+
+
 export default Home;

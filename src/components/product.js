@@ -53,14 +53,25 @@ active {
   /*function moveProductToBasket(productId){
    fetch(`http://localhost:9000/baskets/${productId}/products`,{
       mode: 'no-cors',
+ /*  const handleAddToBasket = () => moveProductToBasket(product.id, 1) */
+
+
+  let customerId = 1;
+  let productId = 1;
+
+
+   function moveProductToBasket(productId, customerId){
+   fetch(`http://localhost:9000/baskets/${customerId}/products`,{
       method:'POST', 
       headers: {"Content-Type": "application/json"}, 
       body: JSON.stringify(productId)
     }).then(()=>{
       console.log('Product is added to basket')
     })
-  }*/
   
+  
+  } 
+   
     return (
         <Card className="card" style={{ minWidth: '300px', border: 'none' }}>
         <Card.Img variant="top" img="true" src={product.image} alt="Card image"/>
@@ -68,6 +79,8 @@ active {
             <Card.Title>{product.productName}</Card.Title>
             <Card.Text>{product.price}</Card.Text>
             <Button onClick={() => createBasketAndAddProductForAnonymousUser(product.productId)}>Add to basket</Button>
+            <Link to="/" className="btn">Home</Link>
+            <Button onClick={() => moveProductToBasket(customerId,productId)}>Add to basket</Button>
             <Button onClick={() => moveToProductDetails(product.productId)}>Read more</Button>
 
             {/* Another way to make the buttons: */}
