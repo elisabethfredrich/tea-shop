@@ -37,7 +37,7 @@ class App extends React.Component {
     <div className="App">
        <BrowserRouter>
         <div>
-              <NavigationBar categories={categoriesTest}/>
+              <NavigationBar/>
 
               <Switch>
             {/*   <userContext.Provider value={{setIsSubmit, setFormValues, formValues, isSubmit}}> */}

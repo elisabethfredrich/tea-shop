@@ -12,6 +12,15 @@ const TeaOverview = () => {
   const [apiResponse, setState] = useState([]);
 
   const callAPI = () => {
+    if(category==="All"){
+        fetch(`http://localhost:9000/products`, { 
+          method : "GET",
+          mode: 'cors'
+      })
+    .then(res => res.json())
+    .then(res => setState(res));
+    }
+    else{
     fetch(`http://localhost:9000/products/productCategories/${category.toLowerCase()}`, { 
 
                 method : "GET",
@@ -19,6 +28,7 @@ const TeaOverview = () => {
             })
         .then(res => res.json())
         .then(res => setState(res));
+    }
   }
 
   // This effect hook is the functional component version of didComponentMount (or whatever its called)
