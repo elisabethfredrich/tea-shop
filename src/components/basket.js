@@ -17,7 +17,6 @@ const Basket = ({user}) => {
     })
       .then(res => res.json())
       .then(res => setState(res));
-      console.log(apiResponse)
     ;
 }
 
@@ -50,7 +49,7 @@ const onRemove = (product) => {
           </tr>
         </thead>
         <tbody>
-        {basketProductsList.map((product) => (<BasketItem key={product.productId} product={product}/>))}
+        {basketProductsList.map((product) => (<BasketItem key={product.productId} product={product} user={user}/>))}
       </tbody>
       </table>
       </div>

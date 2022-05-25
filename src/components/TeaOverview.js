@@ -5,7 +5,7 @@ import Product from './product';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const TeaOverview = () => {
+const TeaOverview = ({user}) => {
 
   const { category } = useParams(); //loads the parameter of the url, e.g. the 'Green' in http://localhost:3000/Green
 
@@ -71,7 +71,7 @@ const TeaOverview = () => {
 
         <Filter handler={filterHandler}/>
     
-        <ProductList products={productList}/> 
+        <ProductList products={productList} user={user}/> 
       </div>
     )
 }

@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 
-const Product = ({product}) => {
+const Product = ({product,user}) => {
 
   let history = useHistory();
   
@@ -35,51 +35,25 @@ active {
       history.push(`/products/${productId}`)
   }
 
-  const[userId, setUserId] = useState('1000');
-  const[products, setProducts] = useState('');
-
-  const createBasketAndAddProductForAnonymousUser = (productId) => {
-    const basket = {userId, products:[{productId}]};
-
-    fetch('http://localhost:9000/baskets', {
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(basket)
-    }).then(() =>{
-      console.log(JSON.stringify(basket))
-    })
-  }
-
-  /*function moveProductToBasket(productId){
-   fetch(`http://localhost:9000/baskets/${productId}/products`,{
-      mode: 'no-cors',
- /*  const handleAddToBasket = () => moveProductToBasket(product.id, 1) */
-
-
-  let customerId = 1;
-  let productId = 1;
-
-
-   function moveProductToBasket(productId, customerId){
-   fetch(`http://localhost:9000/baskets/${customerId}/products`,{
-      method:'POST', 
-      headers: {"Content-Type": "application/json"}, 
-      body: JSON.stringify(productId)
-    }).then(()=>{
-      console.log('Product is added to basket')
-    })
   
-  
-  } 
-   
+  function addProductToBasket(productId){
+    const product = {productId: productId};
+    fetch(`http://localhost:9000/baskets/${user.customerId}/products`,{
+       method:'POST', 
+       headers: {"Content-Type": "application/json"}, 
+       body: JSON.stringify(product)
+     }).then(()=>{
+       console.log('Product is added to basket')
+     })
+    }
+
     return (
         <Card className="card" style={{ minWidth: '300px', border: 'none' }}>
         <Card.Img variant="top" img="true" src={product.image} alt="Card image"/>
         <Card.Body>
             <Card.Title>{product.productName}</Card.Title>
             <Card.Text>{product.price}</Card.Text>
-            <Button onClick={() => createBasketAndAddProductForAnonymousUser(product.productId)}>Add to basket</Button>
-            <Button onClick={() => moveProductToBasket(customerId,productId)}>Add to basket</Button>
+            <Button onClick={() => addProductToBasket(product.productId)}>Add to basket</Button>
             <Button onClick={() => moveToProductDetails(product.productId)}>Read more</Button>
 
             {/* Another way to make the buttons: */}
