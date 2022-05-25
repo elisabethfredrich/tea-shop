@@ -1,10 +1,33 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
+import styled from "styled-components";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 
 const LoginForm = () =>{
+
+      const Button = styled.button`
+  
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        padding: 12px 16px;
+        background-color: #f1f1f1;
+        cursor: pointer;
+        margin: 0.2rem;
+        color: black;
+      /* Add a light grey background on mouse-over */
+      :hover{
+        background-color: #ddd;
+      }
+      /* Add a dark background to the active button */
+      active {
+        background-color: #666;
+        color: white;
+      }
+      `;
+   
     const initialValues = { firstName: "", lastName: "", email: "" };
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
@@ -14,7 +37,6 @@ const LoginForm = () =>{
       const { name, value } = e.target;
       setFormValues({ ...formValues, [name]: value });
     };
-
    
   
     const HandleSubmit = (e) => {
@@ -32,17 +54,13 @@ const LoginForm = () =>{
         setIsSubmit(false);
       })
     
-  
    
-   
-
     useEffect(() => {
       console.log(formErrors);
       if (Object.keys(formErrors).length === 0 && isSubmit) {
         console.log(formValues);
       }
     }, [formErrors]);
-
 
     const validate = (values) => {
       const errors = {};
@@ -67,12 +85,12 @@ const LoginForm = () =>{
     };
     }  
     
-
-    const history = useHistory();
-
-
     
-
+    const history = useHistory();
+    function registered(){
+      alert("Registration successfull!");
+    }
+    
     return (
       <div className="container">
     
@@ -113,14 +131,13 @@ const LoginForm = () =>{
               />
             </div>
             <p>{formErrors.email}</p>
-            {!isSubmit && <button>Submit</button>}
-            {isSubmit && <button disabled>adding registration...</button>}
-            <button onClick={history.goBack}>Cancel</button>
+            {!isSubmit && <Button onClick={registered}>Submit</Button>}
+            {isSubmit && <Button disabled>adding registration...</Button>}
+            <Button onClick={history.goBack}>Cancel</Button>
             
           </div>
         </form>
       </div>
     );
   }
-
 export default LoginForm;
