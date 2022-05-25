@@ -11,16 +11,23 @@ const Product = ({product}) => {
       history.push(`/products/${productId}`)
   }
 
-  function moveProductToBasket(productId){
-   fetch(`http://localhost:9000/baskets/${productId}/products`,{
+ /*  const handleAddToBasket = () => moveProductToBasket(product.id, 1) */
+
+
+  let customerId = 1;
+  let productId = 1;
+
+
+   function moveProductToBasket(productId, customerId){
+   fetch(`http://localhost:9000/baskets/${customerId}/products`,{
       method:'POST', 
       headers: {"Content-Type": "application/json"}, 
       body: JSON.stringify(productId)
     }).then(()=>{
       console.log('Product is added to basket')
     })
-  }
-  
+  } 
+   
     return (
         <Card className="card">
         <Card.Img variant="top" img="true" src={product.image} alt="Card image"/>
@@ -28,7 +35,7 @@ const Product = ({product}) => {
             <Card.Title>{product.productName}</Card.Title>
             <Card.Text>{product.price}</Card.Text>
             <Link to="/" className="btn">Home</Link>
-            <Button onClick={() => moveProductToBasket(product.productId)}>Add to basket</Button>
+            <Button onClick={() => moveProductToBasket(customerId,productId)}>Add to basket</Button>
             <Button onClick={() => moveToProductDetails(product.productId)}>Read more</Button>
 
             {/* Another way to make the buttons: */}

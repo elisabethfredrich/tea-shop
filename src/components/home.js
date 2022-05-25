@@ -1,51 +1,47 @@
- 
+import React from "react"
+import { useState, useContext } from 'react';
+import { userContext } from "./userContext";
 
 
 
+const Home = () =>{
+
+const msg = useContext(userContext); 
+
+const [isSubmit, setIsSubmit, formValues, setFormValues] = useContext(userContext); 
+/* const [isSubmit, setIsSubmit] = useState(false);
+const [formValues, setFormValues] = useState(" ");
+ */
 
 
+const userName = () =>{
+    return formValues.firstName
+  } 
 
 
+let userGreeting = () =>{
+    return <h1>Welcome to the world of ITEa!</h1>
+}; 
 
+let guestGreeting = () =>{
+    return <h1>Hello </h1>
+}
 
-<div id="demo" class="carousel slide" data-ride="carousel">
-    {/* <!-- Indicators --> */}
-    <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2"></li>
-        <li data-target="#demo" data-slide-to="3"></li>
-    </ul>
-    
-    <div class="carousel-inner">
-    <div class="carousel-item active">
-        <h1 id="carousel-text"></h1>
-        <img src="img/pouring_tea.jpg"/>
+let greeting = (isSubmit) =>{
+    if (isSubmit){
+        return userGreeting
+    }
+    else{
+        return guestGreeting
+    }
+}; 
+
+return(
+    <div>
+    Home
+    <div>{greeting}</div>
     </div>
+    );
+}
 
-    <div class="carousel-item">
-        <a href="#" onclick="showProduct('Organic matcha tea', '35', '/img/greenteas/matcha.png', 'Matcha is a fine, green tea powder and is used for the traditional Japanese tea ceremony. Matcha is made from the finest top leaves of the plant and is rich on A-, E- and C vitamins, minerals and polyphenols. It is said that Matcha is even healthier than other teas because the whole tea leaves are used.')">
-        <img src="img/go green on St. Patrick's.png"/>
-        </a>
-    </div>
-
-<div class="carousel-item">
-    <img src="img/fresh_tea_leaves.jpg"/>
-</div>
-
-<div class="carousel-item">
-    <a href="OverviewPages/blacktea.html">
-    <img src="img/Enjoy.jpg"/>
-    </a>
-</div>
-
-
-</div>
-{/* <!-- Left and right controls --> */}
-<a class="carousel-control-prev" href="#demo" data-slide="prev">
-  <span class="carousel-control-prev-icon"></span>
-</a>
-<a class="carousel-control-next" href="#demo" data-slide="next">
-  <span class="carousel-control-next-icon"></span>
-</a>
-</div>
+export default Home;

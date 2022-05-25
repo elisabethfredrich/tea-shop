@@ -1,15 +1,39 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { userContext } from "./userContext";
 import { useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
+import { v4 as uuid } from 'uuid';
+
+
 
 const LoginForm = () =>{
-    const initialValues = { firstName: "", lastName: "", email: "" };
-    const [formValues, setFormValues] = useState(initialValues);
+/* 
+    const [formValues, setFormValues, isSubmit, setIsSubmit]  = useContext(userContext); */
+    //const initialValues = { firstName: "", lastName: "", email: "" };
+/* 
+  const [isSubmit, setIsSubmit, formValues, setFormValues] = useContext(userContext); 
+  */
     const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
+
+    const [formValues, setFormValues] = useState(""); 
+    const [isSubmit, setIsSubmit] = useState(false); 
+
+  /*   const unique_id = uuid();
+    const small_id = unique_id.slice(0,8)
+    const customerId = {small_id} */
+
+ /* TEST */  
+const basketTest = {"customerId":1,"customerName":"Sofie Nielsen","customerEmail":"soni@itu.dk"}
+let customerBasket = {customerId: 1, products:[]};
+
+  let customerId = () => {
+  return Math.floor(Math.random() * 100+1)
+ } 
+ 
   
+
+ let newCustomer = {customerId, ...formValues}
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormValues({ ...formValues, [name]: value });
@@ -21,27 +45,39 @@ const LoginForm = () =>{
       e.preventDefault();
       setFormErrors(validate(formValues));
       setIsSubmit(true);
-  
+     /*  let customerID = 12;
+      const data = {customerID, ...formValues} 
+   */
     
-       fetch(`http://localhost:9000/customers`,{
+      fetch(`http://localhost:9000/customers`,{
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(formValues)
+        body: JSON.stringify(newCustomer)
       }).then(()=>{
-        console.log('new customer added')
+        console.log('new customer added', JSON.stringify(formValues))
         setIsSubmit(false);
       })
-    
+/* 
+      fetch(`http://localhost:9000/baskets`,{
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(customerBasket)
+      }).then(()=>{
+        console.log('basket created')
+      }) */
+
+
+    }
   
    
    
 
     useEffect(() => {
-      console.log(formErrors);
-      if (Object.keys(formErrors).length === 0 && isSubmit) {
-        console.log(formValues);
-      }
-    }, [formErrors]);
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+  }, [formErrors]);
 
 
     const validate = (values) => {
@@ -65,13 +101,9 @@ const LoginForm = () =>{
       }  
       return errors; 
     };
-    }  
     
-
+    
     const history = useHistory();
-
-
-    
 
     return (
       <div className="container">
@@ -113,9 +145,10 @@ const LoginForm = () =>{
               />
             </div>
             <p>{formErrors.email}</p>
-            {!isSubmit && <button>Submit</button>}
+            {!isSubmit && <button type="submit">Submit</button>}
             {isSubmit && <button disabled>adding registration...</button>}
             <button onClick={() => history.push(`/`)}>Cancel</button>
+            
             
           </div>
         </form>
