@@ -30,13 +30,11 @@ const LoginForm = () =>{
       }
       `;
    
-    const initialValues = { firstName: "", lastName: "", email: "" };
-    const [formValues, setFormValues] = useState(initialValues);
 
 
 
 
-const LoginForm = () =>{
+
 /* 
     const [formValues, setFormValues, isSubmit, setIsSubmit]  = useContext(userContext); */
     //const initialValues = { firstName: "", lastName: "", email: "" };
@@ -188,5 +186,5 @@ let customerBasket = {customerId: 1, products:[]};
         </form>
       </div>
     );
-  }}
+  }
 export default LoginForm;
