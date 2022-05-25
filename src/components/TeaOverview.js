@@ -38,7 +38,7 @@ const TeaOverview = () => {
   const [productList, setList] = useState(initialState);
 
     const filterHandler = (filterCategory) => {
-      if (filterCategory === "show all"){
+      if (filterCategory === "reset filter"){
         setList(initialState);
       }
       else{
