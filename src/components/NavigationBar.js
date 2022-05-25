@@ -9,8 +9,8 @@ const NavigationBar = (categories) => {
           <img src="/img/Logo.png" alt="logo"/>
         </Link></div>
       <div className="navbar navbar-expand-lg navbar-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
