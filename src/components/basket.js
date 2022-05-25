@@ -51,6 +51,7 @@ const Basket = ({user}) => {
         {basketProductsList.map((product) => (<BasketItem key={product.productId} product={product} user={user} updateHandler={callAPI}/>))}
       </tbody>
       </table>
+      <h1>Total price: {basketProductsList.reduce((prev,product) => prev + parseInt(product.price.replaceAll(" dkk","")),0)} dkk</h1>
       </div>
     )
 }
