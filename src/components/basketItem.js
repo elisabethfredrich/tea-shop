@@ -4,17 +4,16 @@ import { Link} from "react-router-dom"
 
 
 
-const BasketItem = ({product,user}) => {
+const BasketItem = ({product,user,updateHandler}) => {
 
 
-let deleteItem = () =>{
+const deleteItem = () =>{
     fetch(`http://localhost:9000/baskets/${user.customerId}/products/${product.productId}`,{
         method: "DELETE",
         headers: {"Content-Type": "application/json"},
         mode: 'cors'
     })
-    .then(res => console.log(res))
-    // .then(callAPI() setList)
+    .then(updateHandler);
 
 }
 
