@@ -42,7 +42,6 @@ const LoginForm = () =>{
   const [isSubmit, setIsSubmit, formValues, setFormValues] = useContext(userContext); 
   */
     const [formErrors, setFormErrors] = useState({});
-
     const [formValues, setFormValues] = useState(""); 
     const [isSubmit, setIsSubmit] = useState(false); 
 
@@ -54,13 +53,13 @@ const LoginForm = () =>{
 const basketTest = {"customerId":1,"customerName":"Sofie Nielsen","customerEmail":"soni@itu.dk"}
 let customerBasket = {customerId: 1, products:[]};
 
-  let customerId = () => {
-  return Math.floor(Math.random() * 100+1)
- } 
+  let customerId = Math.floor(Math.random() * 100+1)
+  
  
   
 
- let newCustomer = {customerId, ...formValues}
+/* let newCustomer = {customerId, ...formValues}  */
+/* let newCustomer = {customerId: 7, customerName: "Jane Doe", customerEmail: "janedoe@hotmail.com"}; */
 
     const handleChange = (e) => {
       const { name, value } = e.target;
@@ -72,14 +71,13 @@ let customerBasket = {customerId: 1, products:[]};
       e.preventDefault();
       setFormErrors(validate(formValues));
       setIsSubmit(true);
-     /*  let customerID = 12;
-      const data = {customerID, ...formValues} 
-   */
+      let data = {customerId, ...formValues} 
+   
     
       fetch(`http://localhost:9000/customers`,{
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(newCustomer)
+        body: JSON.stringify(data)
       }).then(()=>{
         console.log('new customer added', JSON.stringify(formValues))
         setIsSubmit(false);

@@ -9,15 +9,15 @@ import { userContext } from "./userContext";
 const Home = () => {
 
 
-  const msg = useContext(userContext); 
+/*   const msg = useContext(userContext); 
 
-  const [isSubmit, setIsSubmit, formValues, setFormValues] = useContext(userContext); 
+  const [isSubmit, setIsSubmit, formValues, setFormValues] = useContext(userContext);  */
   /* const [isSubmit, setIsSubmit] = useState(false);
   const [formValues, setFormValues] = useState(" ");
    */
   
   
-  const userName = () =>{
+ /*  const userName = () =>{
       return formValues.firstName
     } 
   
@@ -38,7 +38,7 @@ const Home = () => {
           return guestGreeting
       }
   }; 
-  
+   */
   
   
 
@@ -68,10 +68,10 @@ const Home = () => {
   ];
   return (
     <div className="App">
-       <div>
+  {/*      <div>
     Home
     <div>{greeting}</div>
-    </div>
+    </div> */}
         <Carousel autoPlay infiniteLoop showArrows={true} showThumbs={false}>
           {images.map((item) => (
             <div key={item.id}

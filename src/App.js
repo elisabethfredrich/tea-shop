@@ -6,7 +6,7 @@ import Footer from './components/footer';
 import TeaOverview from './components/TeaOverview';
 import Basket from './components/basket';
 import LoginForm from './components/login';
-import Home from './components/home';
+ import Home from './components/home'; 
 import About from "./components/about";
 import Terms from "./components/terms";
 import Privacy from "./components/privacy";
@@ -63,11 +63,11 @@ class App extends React.Component {
     </div>
   )};
 }
-
-// function Home() {
-//   return <h2>Home</h2>;
-// }
-
+/* 
+function Home() {
+return <h2>Home</h2>;
+}
+ */
 
 
 
