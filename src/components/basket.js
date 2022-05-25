@@ -1,20 +1,45 @@
 import React from "react";
 import BasketItem from './basketItem';
 
-const Basket = ({basketList}) => {
+import { useState, useContext, useEffect} from 'react';
+
+const Basket = ({user}) => {
+
+  const [apiResponse, setState] = useState([]);
+
+  const callAPI = () => {
+    console.log("userid:"+user.customerId)
+
+    fetch(`http://localhost:9000/baskets/${user.customerId}/products`, {
+      method: "GET",
+      headers: {"Content-Type": "application/json"},
+      mode: 'cors'
+    })
+      .then(res => res.json())
+      .then(res => setState(res));
+      console.log(apiResponse)
+    ;
+}
+
+  useEffect(() => {
+    callAPI();
+  }, [])
+
+  useEffect(()=>{
+    setList(apiResponse);
+  },[apiResponse])
 
 
-/*  let basketPost = () =>{
-   isSubmit ? 
- }
-  {isSubmit ? "Make a Post for an non registered user - else get the state of the userID"}
- */
+  const initialState = apiResponse;
+  const [basketProductsList, setList] = useState(initialState);
 
 
 const onRemove = (product) => {
   
 }
     return (
+        <div>
+        <h1>{user === undefined ? "Basket" :  user.firstName +"'s basket"}</h1>
         <table className="table">
         <thead>
           <tr>
@@ -25,9 +50,10 @@ const onRemove = (product) => {
           </tr>
         </thead>
         <tbody>
-        {basketList.map((product) => (<BasketItem key={product.productId} product={product}/>))}
+        {basketProductsList.map((product) => (<BasketItem key={product.productId} product={product}/>))}
       </tbody>
       </table>
+      </div>
     )
 }
 

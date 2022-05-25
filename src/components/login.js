@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 import { v4 as uuid } from 'uuid';
 
-const LoginForm = () =>{
+const LoginForm = ({setUser}) =>{
 
       const Button = styled.button`
   
@@ -73,17 +73,28 @@ let customerBasket = {customerId: 1, products:[]};
       setIsSubmit(true);
       let data = {customerId, ...formValues} 
    
+
     
       fetch(`http://localhost:9000/customers`,{
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(data)
-      }).then(()=>{
-        console.log('new customer added', JSON.stringify(formValues))
-        setIsSubmit(false);
       })
-    
-/* 
+      .then((res)=>{ //does not work for login if you are already registered
+        if(res.status >= 400) {throw new Error("Server responds with error!")}
+
+        console.log('new customer added', JSON.stringify(formValues))
+        console.log("Customer id: "+data.customerId)
+        setIsSubmit(false);
+
+        //setUserId(data.customerId)
+
+        updateUser(data.customerId)
+        createBasket(data.customerId)
+
+      })
+
+      /* 
       fetch(`http://localhost:9000/baskets`,{
         method: 'POST',
         headers: {"Content-Type": "application/json"},
@@ -91,8 +102,32 @@ let customerBasket = {customerId: 1, products:[]};
       }).then(()=>{
         console.log('basket created')
       }) */
+      
+      
+    }
+    
+    const updateUser = (userId) => {
+      fetch(`http://localhost:9000/customers/${userId}`, {
+        method: "GET",
+        headers: {"Content-Type": "application/json"},
+        mode: 'cors'
+      })
+        .then(res => res.json())
+        .then(res => setUser(res));
+      ;
+    }
 
+    const createBasket = (userId) => {
+      const basket = {customerId: userId, products:[]}
 
+      fetch(`http://localhost:9000/baskets`,{
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(basket)
+      })
+      .then((res)=>{ //does not work for login if you are already registered
+        console.log(res)
+      })
     }
   
    
@@ -128,10 +163,17 @@ let customerBasket = {customerId: 1, products:[]};
     
     
     const history = useHistory();
-    function registered(){
-      alert("Registration successfull!");
+
+
+    function register(){
+      //alert("Registration successfull!");
+      //history.push("/")
     }
     
+    function logout(){
+      setUser(undefined);
+      history.push("/")
+    }
     
  
 
@@ -175,9 +217,10 @@ let customerBasket = {customerId: 1, products:[]};
               />
             </div>
             <p>{formErrors.email}</p>
-            {!isSubmit && <Button onClick={registered}>Submit</Button>}
+            {!isSubmit && <Button onClick={register}>Submit</Button>}
             {isSubmit && <Button disabled>adding registration...</Button>}
             <Button onClick={history.goBack}>Cancel</Button>
+            <Button onClick={logout}>Log out</Button>
             
             
           </div>

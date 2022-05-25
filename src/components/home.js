@@ -3,10 +3,36 @@ import { Link, useHistory } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import React from "react"
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect} from 'react';
 import { userContext } from "./userContext";
 
-const Home = () => {
+const Home = ({user}) => {
+
+  // const [apiResponse, setState] = useState([]);
+
+  // const callAPI = () => {
+  //   fetch(`http://localhost:9000/customers/${userId}`, {
+  //     method: "GET",
+  //     headers: {"Content-Type": "application/json"},
+  //     mode: 'cors'
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => setState(res));
+  //     console.log(apiResponse)
+  //   ;
+  // }
+  
+  //   useEffect(() => {
+  //     callAPI();
+  //   }, [])
+
+  //   useEffect(()=>{
+  //     setUser(apiResponse);
+  //   },[apiResponse])
+  
+  //   const [user, setUser] = useState({});
+  
+
 
 
 /*   const msg = useContext(userContext); 
@@ -40,9 +66,6 @@ const Home = () => {
   }; 
    */
   
-  
-
-
 
   const history = useHistory();
   const images = [
@@ -72,6 +95,7 @@ const Home = () => {
     Home
     <div>{greeting}</div>
     </div> */}
+    <h1>{user === undefined ? "Welcome stranger!" : "Welcome old friend, " + user.firstName +" :)"}</h1>
         <Carousel autoPlay infiniteLoop showArrows={true} showThumbs={false}>
           {images.map((item) => (
             <div key={item.id}
