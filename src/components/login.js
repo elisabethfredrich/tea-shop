@@ -53,7 +53,7 @@ const LoginForm = () =>{
 const basketTest = {"customerId":1,"customerName":"Sofie Nielsen","customerEmail":"soni@itu.dk"}
 let customerBasket = {customerId: 1, products:[]};
 
-  let customerId = Math.floor(Math.random() * 100+1)
+  let customerId = Math.floor(Math.random() * 1000+1)
   
  
   

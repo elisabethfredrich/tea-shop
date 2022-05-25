@@ -1,8 +1,34 @@
 import {Link} from "react-router-dom"
 import React from "react";
+import {useState, useEffect} from "react";
 
-const NavigationBar = (categories) => {
-  const categoriesTest = [{"categoryName":"Green tea"}, {"categoryName":"Black tea"}, {"categoryName":"White tea"},{"categoryName":"Herbal tea"},{"categoryName":"Rooibos tea"}];
+const NavigationBar = () => {
+  const [apiResponse, setState] = useState([]);
+
+const callAPI = () => {
+  fetch("http://localhost:9000/productCategories", {
+    method: "GET",
+    headers: {"Content-Type": "application/json"},
+    mode: 'cors'
+  })
+    .then(res => res.json())
+    .then(res => setState(res));
+  ;
+}
+
+  useEffect(() => {
+    callAPI();
+  }, [])
+
+  useEffect(()=>{
+    setList(apiResponse);
+  },[apiResponse])
+
+
+  const initialState = apiResponse;
+  const [categoriesList, setList] = useState(initialState);
+
+
   return(
     <div>
       <div id="logo-top-container"><Link className="navbar-brand-top" to="/">
@@ -15,7 +41,7 @@ const NavigationBar = (categories) => {
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
       
-          {categoriesTest.map((category)=>(
+          {categoriesList.map((category)=>(
                 <li className="nav-item" key={category.categoryName}>
                   {/* The following to={...} defines the path for each category menu button. Right now it will be /white, /black and so on */}
                 <Link className="nav-link" activeclassname="active" to={`/${category.categoryName.replaceAll(" tea","")}`}>
