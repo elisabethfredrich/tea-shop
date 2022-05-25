@@ -16,7 +16,9 @@ const Basket = ({user}) => {
       mode: 'cors'
     })
       .then(res => res.json())
-      .then(res => setState(res));
+      .then(res => setState(res))
+      .then(
+      console.log("api response: "+apiResponse));
     ;
 }
 
@@ -33,9 +35,6 @@ const Basket = ({user}) => {
   const [basketProductsList, setList] = useState(initialState);
 
 
-const onRemove = (product) => {
-  
-}
     return (
         <div>
         <h1>{user === undefined ? "Basket" :  user.firstName +"'s basket"}</h1>
@@ -49,7 +48,7 @@ const onRemove = (product) => {
           </tr>
         </thead>
         <tbody>
-        {basketProductsList.map((product) => (<BasketItem key={product.productId} product={product} user={user}/>))}
+        {basketProductsList.map((product) => (<BasketItem key={product.productId} product={product} user={user} updateHandler={callAPI}/>))}
       </tbody>
       </table>
       </div>
