@@ -79,7 +79,6 @@ active {
             <Card.Title>{product.productName}</Card.Title>
             <Card.Text>{product.price}</Card.Text>
             <Button onClick={() => createBasketAndAddProductForAnonymousUser(product.productId)}>Add to basket</Button>
-            <Link to="/" className="btn">Home</Link>
             <Button onClick={() => moveProductToBasket(customerId,productId)}>Add to basket</Button>
             <Button onClick={() => moveToProductDetails(product.productId)}>Read more</Button>
 
