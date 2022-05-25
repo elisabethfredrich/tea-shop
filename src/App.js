@@ -44,6 +44,10 @@ class App extends React.Component {
                 <Route path="/basket" component={() => <Basket basketList={productsTest}/>} />
                 <Route path="/search" component={Search} />
                 <Route path="/login" component={LoginForm}/>
+                <Route path="/about" component={About}/>
+                <Route path="/terms" component={Terms}/>
+                <Route path="/privacy" component={Privacy}/>
+                <Route path="/contact" component={Contact}/>
                 <Route path="/products/:productId" component={() => <ProductDetails />} />
                 {/* the thing below with the props ensures that the router can differientate between /white and /black and
                 that it knows to update the TeaOverviw based on that. Solution found here: https://stackoverflow.com/questions/62836374/react-router-does-not-update-component-if-url-parameter-changes */}
