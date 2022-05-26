@@ -5,17 +5,19 @@ import NavigationBar from './components/NavigationBar';
 import Footer from './components/footer';
 import TeaOverview from './components/TeaOverview';
 import Basket from './components/basket';
-import LoginForm from './components/login';
+import Login from './components/Login';
  import Home from './components/home'; 
 import About from "./components/about";
 import Terms from "./components/terms";
 import Privacy from "./components/privacy";
 import Contact from "./components/contact";
+import Register from "./components/Register";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "./style.css";
 import { UserContext } from "./components/userContext";
 import { useState, useEffect } from 'react';
+
 
 const App = () => {
 
@@ -34,7 +36,8 @@ const App = () => {
 
               <Switch>
                 <Route path="/basket" component={() => <Basket />} />
-                <Route path="/login" component={() => <LoginForm />}/>
+                <Route path="/login" component={() => <Login />}/>
+                <Route path="/register" component={() => <Register/>}/>
                 <Route path="/about" component={About}/>
                 <Route path="/terms" component={Terms}/>
                 <Route path="/privacy" component={Privacy}/>
