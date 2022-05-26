@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useContext } from 'react';
-import { userContext } from "./userContext";
+import { UserContext } from "./userContext";
 import { useHistory } from "react-router-dom";
 // import { Button } from "react-bootstrap";
 import styled from "styled-components";
@@ -61,50 +61,107 @@ let customerBasket = {customerId: 1, products:[]};
 /* let newCustomer = {customerId, ...formValues}  */
 /* let newCustomer = {customerId: 7, customerName: "Jane Doe", customerEmail: "janedoe@hotmail.com"}; */
 
+const { setUserId, setUserName } = useContext(UserContext);
+
+const initialState = {customerId:1,customerName:"Sofie Nielsen"}
+const [userTest,setUserTest] = useState(initialState);
+
+
+const handleLogin = () => {
+  // console.log("test:"+userTest.customerId + " " + userTest.customerName);
+  setUserId(userTest.customerId);
+  setUserName(userTest.customerName);
+}
+
+const handleLogout = () => {
+  setUserId(undefined);
+  setUserName(undefined);
+}
+
+const handleSubmit2 = (e) => {
+  e.preventDefault();
+  setFormErrors(validate(formValues));
+  setIsSubmit(true);
+
+  let customerName = formValues.firstName +" "+ formValues.lastName;
+  // let email = formValues.email;
+  let data = {customerId, ...formValues} 
+
+  console.log("user test before update:" + JSON.stringify(userTest))
+  // setUserTest(JSON.stringify({customerId, customerName}));
+  let updatedValue = {customerId:2,customerName:"Katrine Christensen"}
+  // console.log(updatedValue)
+  setUserTest({customerId, customerName})
+  console.log(userTest)
+  console.log("user test was updated to:" + JSON.stringify(userTest))
+  handleLogin();
+
+  fetch(`http://localhost:9000/customers`,{
+    method: 'POST',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data)
+  })
+  .then((res)=>{ //does not work for login if you are already registered
+    if(res.status >= 400) {throw new Error("Server responds with error!")}
+
+    // console.log("something happened")
+    // console.log('new customer added', JSON.stringify(formValues))
+    // console.log("Customer id: "+data.customerId)
+    // setIsSubmit(false);
+
+    // //setUserId(data.customerId)
+
+    // updateUser(data.customerId)
+    // createBasket(data.customerId)
+
+  })
+  
+}
+
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormValues({ ...formValues, [name]: value });
     };
    
   
-    const HandleSubmit = (e) => {
-      e.preventDefault();
-      setFormErrors(validate(formValues));
-      setIsSubmit(true);
-      let data = {customerId, ...formValues} 
+    // const HandleSubmit = (e) => {
+    //   e.preventDefault();
+    //   setFormErrors(validate(formValues));
+    //   setIsSubmit(true);
+    //   let data = {customerId, ...formValues} 
    
 
     
-      fetch(`http://localhost:9000/customers`,{
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data)
-      })
-      .then((res)=>{ //does not work for login if you are already registered
-        if(res.status >= 400) {throw new Error("Server responds with error!")}
+    //   fetch(`http://localhost:9000/customers`,{
+    //     method: 'POST',
+    //     headers: {"Content-Type": "application/json"},
+    //     body: JSON.stringify(data)
+    //   })
+    //   .then((res)=>{ //does not work for login if you are already registered
+    //     if(res.status >= 400) {throw new Error("Server responds with error!")}
 
-        console.log('new customer added', JSON.stringify(formValues))
-        console.log("Customer id: "+data.customerId)
-        setIsSubmit(false);
+    //     console.log('new customer added', JSON.stringify(formValues))
+    //     console.log("Customer id: "+data.customerId)
+    //     setIsSubmit(false);
 
-        //setUserId(data.customerId)
+    //     //setUserId(data.customerId)
 
-        updateUser(data.customerId)
-        createBasket(data.customerId)
+    //     updateUser(data.customerId)
+    //     createBasket(data.customerId)
 
-      })
+    //   })
 
-      /* 
-      fetch(`http://localhost:9000/baskets`,{
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(customerBasket)
-      }).then(()=>{
-        console.log('basket created')
-      }) */
+    //   /* 
+    //   fetch(`http://localhost:9000/baskets`,{
+    //     method: 'POST',
+    //     headers: {"Content-Type": "application/json"},
+    //     body: JSON.stringify(customerBasket)
+    //   }).then(()=>{
+    //     console.log('basket created')
+    //   }) */
       
       
-    }
+    // }
     
     const updateUser = (userId) => {
       fetch(`http://localhost:9000/customers/${userId}`, {
@@ -179,8 +236,11 @@ let customerBasket = {customerId: 1, products:[]};
 
     return (
       <div className="container">
+
+        <Button onClick={handleLogin}>Log ind</Button>
+        <Button onClick={handleLogout}>Log ud</Button>
     
-        <form onSubmit={HandleSubmit}>
+        <form onSubmit={handleSubmit2}>
           <h1>Registration</h1>
           <div className="ui divider"></div>
           <div className="ui form">

@@ -14,9 +14,8 @@ import Contact from "./components/contact";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "./style.css";
-
+import { UserContext } from "./components/userContext";
 import { useState, useEffect } from 'react';
-
 
 const App = () => {
 
@@ -27,12 +26,17 @@ const App = () => {
 
     const [user, setUser] = useState({undefined});
 
+    const [userId, setUserId] = useState(undefined);
+    const [userName, setUserName] = useState(undefined);
+
 
     return (
     <div className="App">
        <BrowserRouter>
         <div>
               <NavigationBar/>
+
+              <UserContext.Provider value={{userId, setUserId, userName, setUserName}}>
 
               <Switch>
             {/*   <userContext.Provider value={{setIsSubmit, setFormValues, formValues, isSubmit}}> */}
@@ -53,6 +57,8 @@ const App = () => {
               </Switch>
 
               <Footer/>
+
+              </UserContext.Provider>
             </div>
         </BrowserRouter>
     </div>
@@ -70,6 +76,9 @@ function Search() {
   return <h2>Search</h2>;
 }
 
-
+function User() {
+    const value = React.useContext(UserContext);  
+    return <h1>{value}</h1>;
+}
 
 export default App;

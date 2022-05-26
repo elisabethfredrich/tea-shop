@@ -3,8 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import React from "react"
+import { UserContext } from "./userContext";
 import { useState, useContext, useEffect} from 'react';
-import { userContext } from "./userContext";
 
 const Home = ({user}) => {
 
@@ -67,6 +67,7 @@ const Home = ({user}) => {
    */
   
 
+  const context = React.useContext(UserContext);  
   const history = useHistory();
   const images = [
     {
@@ -95,6 +96,8 @@ const Home = ({user}) => {
     Home
     <div>{greeting}</div>
     </div> */}
+    <h1>Test: {context.userId === undefined ? "Welcome stranger!" : "Welcome old friend, " + context.userId +" :)"}</h1>
+    
     <h1>{user === undefined ? "Welcome stranger!" : "Welcome old friend, " + user.firstName +" :)"}</h1>
         <Carousel autoPlay infiniteLoop showArrows={true} showThumbs={false}>
           {images.map((item) => (

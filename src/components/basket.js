@@ -1,5 +1,6 @@
 import React from "react";
 import BasketItem from './basketItem';
+import { UserContext } from "./userContext";
 
 import { useState, useContext, useEffect} from 'react';
 
@@ -59,10 +60,11 @@ const getProduct=(product) => {
 
   const initialState = apiResponse;
   const [basketProductsList, setList] = useState(initialState);
-
+  const context = React.useContext(UserContext);  
 
     return (
         <div>
+          <h1>Test: {context.userId === undefined ? "Basket" :  context.userId+context.userName +"'s basket"}</h1>
         <h1>{user === undefined ? "Basket" :  user.firstName +"'s basket"}</h1>
         <table className="table">
         <thead>
