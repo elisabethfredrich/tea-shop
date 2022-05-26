@@ -21,6 +21,7 @@ const App = () => {
 
     const [userId, setUserId] = useState(undefined);
     const [userName, setUserName] = useState(undefined);
+    const [basket, setBasket] = useState([]);
 
 
     return (
@@ -29,7 +30,7 @@ const App = () => {
         <div>
               <NavigationBar/>
 
-              <UserContext.Provider value={{userId, setUserId, userName, setUserName}}>
+              <UserContext.Provider value={{userId, setUserId, userName, setUserName, basket, setBasket}}>
 
               <Switch>
                 <Route path="/basket" component={() => <Basket />} />

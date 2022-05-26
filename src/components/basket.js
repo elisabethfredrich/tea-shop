@@ -10,6 +10,10 @@ const Basket = () => {
   const [apiResponse, setState] = useState([]);
 
   const callAPI = () => {
+    if(user.userId===undefined){
+      getBasketForAnynomousUser();
+      return;
+    }
     console.log("userid:"+user.customerId)
 
     fetch(`http://localhost:9000/baskets/${user.userId}/products`, {
@@ -33,35 +37,36 @@ const getProduct=(product) => {
   })
     .then(res => res.json())
     .then(res=> {
-      let test = apiResponse;
-      test.push(res);
-      setState(test)
+        res = { product:res, amount:product.amount} 
+        console.log(res)
+        let basket = apiResponse;
+        basket.push(res);
+        setState(basket);
     }
       )
   ;
 }
 
+const getBasketForAnynomousUser = () => {
+  console.log(user.basket)
+  const basketArray = user.basket;
+  setState([]);
+  basketArray.forEach(product => {
+    getProduct(product);
+  })
+}
 
   useEffect(() => {
-    if(user.userId===undefined){
-      const basketArray = JSON.parse(localStorage.getItem("basket"));
-      basketArray.forEach(product => {
-        getProduct(product)
-      });
-      //setState(basketArray);
-      return;
-    }
     callAPI();
   }, [])
+
+  
+  const initialState = apiResponse;
+  const [basketProductsList, setList] = useState(initialState);
 
   useEffect(()=>{
     setList(apiResponse);
   },[apiResponse])
-
-
-
-  const initialState = apiResponse;
-  const [basketProductsList, setList] = useState(initialState);
 
     return (
         <div>
@@ -77,8 +82,8 @@ const getProduct=(product) => {
           </tr>
         </thead>
         <tbody>
-        {basketProductsList.map((product) => (<BasketItem key={product.product.productId} product={product.product} amount={product.amount} user={user} updateHandler={callAPI}/>))}
-      </tbody>
+        {basketProductsList.map((product) => (<BasketItem key={product.product.productId} product={product.product} amount={product.amount} updateHandler={callAPI}/>))} 
+        </tbody>
       </table>
       <h1>Total price: {basketProductsList.reduce((prev,product) => prev + parseInt(product.product.price.replaceAll(" dkk",""))*product.amount,0)} dkk</h1>
       </div>

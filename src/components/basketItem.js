@@ -11,6 +11,23 @@ const BasketItem = ({product,amount,updateHandler}) => {
 const user = React.useContext(UserContext);  
 
 const deleteItem = () =>{
+    if(user.userId===undefined){
+        console.log("hej")
+        const basketArray = user.basket;
+        for (let i = 0; i < basketArray.length; ++i) {
+            const element = basketArray[i];
+            if(element.productId===product.productId) { 
+                element.amount--;
+                if(element.amount===0){
+                    basketArray.splice(i);
+                }
+            }
+        }
+        console.log(basketArray)
+        user.setBasket(basketArray);
+        updateHandler()
+        return;
+    }
     fetch(`http://localhost:9000/baskets/${user.userId}/products/${product.productId}`,{
         method: "DELETE",
         headers: {"Content-Type": "application/json"},

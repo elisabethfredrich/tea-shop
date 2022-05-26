@@ -58,14 +58,29 @@ active {
   // }
   
   function addProductToBasket(productId){
+    // if(user.userId===undefined){
+    //   let array = JSON.parse(localStorage.getItem("basket"))
+    //   if(array===null) {array = []}
+
+    //   array.push({productId:productId})
+
+    //   console.log(array);
+    //   localStorage.setItem("basket", JSON.stringify(array));
+    //   return;
+    // }
+
     if(user.userId===undefined){
-      let array = JSON.parse(localStorage.getItem("basket"))
-      if(array===null) {array = []}
-
-      array.push({productId:productId})
-
-      console.log(array);
-      localStorage.setItem("basket", JSON.stringify(array));
+      let array = user.basket;
+      let findProductIfAlreadyThere = array.filter(product => product.productId === productId)
+      if(findProductIfAlreadyThere.length > 0){
+        findProductIfAlreadyThere[0].amount++;
+        // console.log(findProductIfAlreadyThere[0].amount); 
+        console.log(array)
+        return;
+      }
+      array.push({productId:productId,amount:1})
+      console.log(array)
+      user.setBasket(array)
       return;
     }
 
