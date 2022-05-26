@@ -4,7 +4,7 @@ import { Link} from "react-router-dom"
 
 
 
-const BasketItem = ({product,user,updateHandler}) => {
+const BasketItem = ({product,amount,user,updateHandler}) => {
 
 
 const deleteItem = () =>{
@@ -21,7 +21,8 @@ const deleteItem = () =>{
         <tr>
             <th scope="row"><img className="basket-img" src={product.image}/></th>
             <td>{product.productName}</td>
-            <td>{product.price}</td>
+            <td>{amount}</td>
+            <td>{parseInt(product.price.replaceAll(" dkk",""))*amount} dkk</td>
             <td><Link to="/basket" onClick={deleteItem} className="btn"> Delete from basket</Link></td>
         </tr>
     )
