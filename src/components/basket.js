@@ -10,10 +10,13 @@ const Basket = () => {
   const [apiResponse, setState] = useState([]);
 
   const callAPI = () => {
-    if(user.userId===undefined){
-      getBasketForAnynomousUser();
+    if(user.userId === undefined){
+      setState(user.basket)
       return;
     }
+
+    if(user.userId !== undefined){
+   
     console.log("userid:"+user.customerId)
 
     fetch(`http://localhost:9000/baskets/${user.userId}/products`, {
@@ -26,35 +29,7 @@ const Basket = () => {
       .then(
       console.log("api response: "+apiResponse));
     ;
-}
-
-//for non-registered user
-const getProduct=(product) => {
-  fetch(`http://localhost:9000/products/${product.productId}`, {
-    method: "GET",
-    headers: {"Content-Type": "application/json"},
-    mode: 'cors'
-  })
-    .then(res => res.json())
-    .then(res=> {
-        res = { product:res, amount:product.amount} 
-        console.log(res)
-        let basket = apiResponse;
-        basket.push(res);
-        setState(basket);
-    }
-      )
-  ;
-}
-
-const getBasketForAnynomousUser = () => {
-  console.log(user.basket)
-  const basketArray = user.basket;
-  setState([]);
-  basketArray.forEach(product => {
-    getProduct(product);
-  })
-}
+}}
 
   useEffect(() => {
     callAPI();
