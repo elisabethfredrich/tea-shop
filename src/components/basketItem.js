@@ -37,7 +37,7 @@ const deleteItem = () =>{
         headers: {"Content-Type": "application/json"},
         mode: 'cors'
     })
-    .then(updateHandler());
+    .then(updateHandler);
     }
 }
 

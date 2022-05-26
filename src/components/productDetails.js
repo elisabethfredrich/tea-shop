@@ -1,13 +1,15 @@
 import { Button } from "react-bootstrap";
 import React from "react";
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { UserContext } from "./userContext";
+
+import { useState, useContext, useEffect} from 'react';
 
 
 const ProductDetails = () => {
 
     const { productId } = useParams();
-
+    const user = React.useContext(UserContext);  
     const [apiResponse, setState] = useState([]);
 
     const callAPI = () => {
@@ -19,14 +21,57 @@ const ProductDetails = () => {
         .then(res => setState(res));
     }
 
-    // This effect hook is the functional component version of didComponentMount (or whatever its called)
-    // it is called only once upon loading/building the page/component.
+
+
+    function addProductToBasket(){
+      if(user.userId===undefined){
+        let array = user.basket;
+  
+          let index=array.findIndex((p)=>p.product.productId===parseInt(productId))
+          if(index !==-1){
+            array[index].amount++;
+            user.setBasket(array)
+            console.log(user.basket)
+            return;
+          }
+        else{
+          getProduct();
+        }
+  
+      }
+      else{
+      const product = {productId: parseInt(productId)};
+      fetch(`http://localhost:9000/baskets/${user.userId}/products`,{
+         method:'POST', 
+         headers: {"Content-Type": "application/json"}, 
+         body: JSON.stringify(product)
+       }).then((res)=>{
+         console.log('Product is added to basket')
+       })
+      }}
+
+      const getProduct=() => {
+        fetch(`http://localhost:9000/products/${productId}`, {
+          method: "GET",
+          headers: {"Content-Type": "application/json"},
+          mode: 'cors'
+        })
+          .then(res => res.json())
+          .then(res=> {
+              let array = user.basket;
+              array.push({product:res,amount:1});
+              user.setBasket(array);
+              console.log(array);
+          }
+            )
+        ;
+      }
+
+
     useEffect(() =>{
     callAPI();
     },[])
 
-      // We need to have this useEffect hook in order to update the ProductList component correctly
-  // it is only called when the apiResponse has been fetched
   useEffect(()=>{
     setProduct(apiResponse);
   },[apiResponse])
@@ -45,7 +90,7 @@ const ProductDetails = () => {
             </p>
             <p className="card-text">{product.price}</p>
         
-            <button className="btn" onclick={()=> console.log()}>Add to basket</button>
+            <button className="btn" onClick={addProductToBasket}>Add to basket</button>
               </div>
         </div>
     )
