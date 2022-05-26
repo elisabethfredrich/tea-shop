@@ -5,7 +5,7 @@ import NavigationBar from './components/NavigationBar';
 import Footer from './components/footer';
 import TeaOverview from './components/TeaOverview';
 import Basket from './components/basket';
-import Login from './components/Login';
+import Login from './components/login';
  import Home from './components/home'; 
 import About from "./components/about";
 import Terms from "./components/terms";

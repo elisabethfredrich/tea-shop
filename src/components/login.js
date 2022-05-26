@@ -10,7 +10,6 @@ const Login = () =>{
     const [formErrorslogin, setFormErrorslogin] = useState({});
     const [isLoginSubmit, setLoginIsSubmit] = useState(false); 
 
-    let [errorMessage,setErrorMessage] = useState("")
 
   const user = useContext(UserContext);
 
@@ -31,12 +30,6 @@ const Login = () =>{
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: 'cors'
-          })
-          .then(res => {
-            if(res.status >= 400) {
-              setErrorMessage("User does not exist. Please register.")
-              throw new Error("Server responds with error!")
-            }
           })
             .then(res => res.json()).then(res => {
               user.setUserId(res.customerId);
@@ -117,7 +110,6 @@ return (
 </form>
 <Button onClick={handleLogout}>Log out</Button>
 <Button onClick={goToRegister}>Register here</Button>
-{isLoginSubmit && <p>{errorMessage}</p>}
 </div>
 );
 
