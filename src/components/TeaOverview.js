@@ -5,7 +5,7 @@ import Product from './product';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const TeaOverview = ({user}) => {
+const TeaOverview = () => {
 
   const { category } = useParams(); //loads the parameter of the url, e.g. the 'Green' in http://localhost:3000/Green
 
@@ -64,14 +64,14 @@ const TeaOverview = ({user}) => {
          <header id="header" className="teapage-header">
           <div className="headline-container">
             <h1 className="white_headline">{category} teas</h1>
-            <h3 className="white_headline">Discover our tasty {category.toLowerCase()} teas</h3>
+            <h3 className="white_headline">Discover our tasty {category.toLowerCase()==="all"?"":category.toLowerCase()} teas</h3>
           </div>
           <img src="/img/tea-leaves3.jpg" />
         </header>
 
         <Filter handler={filterHandler}/>
     
-        <ProductList products={productList} user={user}/> 
+        <ProductList products={productList}/> 
       </div>
     )
 }

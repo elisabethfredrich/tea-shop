@@ -208,7 +208,7 @@ width:100%;}
   width: auto;
 }
 
-.navbar-brand img {
+.navbar-brand-logo img {
   height: 2.4rem;
 }
 
@@ -224,7 +224,7 @@ width:100%;}
     background-color: #f2f2f2;
   }
 
-  .navbar-brand {
+  .navbar-brand-logo {
     display: none;
   }
 }

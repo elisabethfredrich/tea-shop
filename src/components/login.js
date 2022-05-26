@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect, useContext } from 'react';
-import { userContext } from "./userContext";
+import { UserContext } from "./userContext";
 import { useHistory } from "react-router-dom";
 // import { Button } from "react-bootstrap";
 import styled from "styled-components";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 import { v4 as uuid } from 'uuid';
 
-const LoginForm = ({setUser}) =>{
+const LoginForm = () =>{
 
       const Button = styled.button`
   
@@ -31,94 +31,68 @@ const LoginForm = ({setUser}) =>{
       `;
    
 
+  const history = useHistory();
+  const [formErrors, setFormErrors] = useState({});
+  const [formValues, setFormValues] = useState(""); 
+  const [isSubmit, setIsSubmit] = useState(false); 
 
-
-
-
-/* 
-    const [formValues, setFormValues, isSubmit, setIsSubmit]  = useContext(userContext); */
-    //const initialValues = { firstName: "", lastName: "", email: "" };
-/* 
-  const [isSubmit, setIsSubmit, formValues, setFormValues] = useContext(userContext); 
-  */
-    const [formErrors, setFormErrors] = useState({});
-    const [formValues, setFormValues] = useState(""); 
-    const [isSubmit, setIsSubmit] = useState(false); 
-
-  /*   const unique_id = uuid();
-    const small_id = unique_id.slice(0,8)
-    const customerId = {small_id} */
-
- /* TEST */  
-const basketTest = {"customerId":1,"customerName":"Sofie Nielsen","customerEmail":"soni@itu.dk"}
-let customerBasket = {customerId: 1, products:[]};
-
-  let customerId = Math.floor(Math.random() * 1000+1)
+let customerId = Math.floor(Math.random() * 1000+1)
   
- 
-  
+const { setUserId, setUserName } = useContext(UserContext);
+const {userId, userName} = useContext(UserContext);
 
-/* let newCustomer = {customerId, ...formValues}  */
-/* let newCustomer = {customerId: 7, customerName: "Jane Doe", customerEmail: "janedoe@hotmail.com"}; */
+const initialState = {customerId:userId,customerName:userName}
+const [user,setUser] = useState(initialState);
+
+
+const handleLogin = () => {
+  setUserId(user.customerId);
+  setUserName(user.customerName);
+}
+
+const handleLogout = () => {
+  setUserId(undefined);
+  setUserName(undefined);
+}
+
+useEffect(()=>{
+  handleLogin();
+  console.log('User was updated')
+},[user])
+
+
+const handleSubmit2 = (e) => {
+  e.preventDefault();
+  setFormErrors(validate(formValues));
+  setIsSubmit(true);
+  let customerName = formValues.firstName +" "+ formValues.lastName;
+  let data = {customerId, ...formValues} 
+
+  fetch(`http://localhost:9000/customers`,{
+    method: 'POST',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(data)
+  })
+  .then((res)=>{ //does not work for login if you are already registered
+    if(res.status >= 400) {throw new Error("Server responds with error!")}
+    console.log('new customer added', JSON.stringify(formValues))
+    setUser({customerId,customerName})
+    setIsSubmit(false);
+    createBasket(customerId)
+
+  })
+  
+}
 
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormValues({ ...formValues, [name]: value });
     };
-   
-  
-    const HandleSubmit = (e) => {
-      e.preventDefault();
-      setFormErrors(validate(formValues));
-      setIsSubmit(true);
-      let data = {customerId, ...formValues} 
-   
-
     
-      fetch(`http://localhost:9000/customers`,{
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data)
-      })
-      .then((res)=>{ //does not work for login if you are already registered
-        if(res.status >= 400) {throw new Error("Server responds with error!")}
-
-        console.log('new customer added', JSON.stringify(formValues))
-        console.log("Customer id: "+data.customerId)
-        setIsSubmit(false);
-
-        //setUserId(data.customerId)
-
-        updateUser(data.customerId)
-        createBasket(data.customerId)
-
-      })
-
-      /* 
-      fetch(`http://localhost:9000/baskets`,{
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(customerBasket)
-      }).then(()=>{
-        console.log('basket created')
-      }) */
-      
-      
-    }
-    
-    const updateUser = (userId) => {
-      fetch(`http://localhost:9000/customers/${userId}`, {
-        method: "GET",
-        headers: {"Content-Type": "application/json"},
-        mode: 'cors'
-      })
-        .then(res => res.json())
-        .then(res => setUser(res));
-      ;
-    }
 
     const createBasket = (userId) => {
       const basket = {customerId: userId, products:[]}
+      console.log(JSON.stringify(basket))
 
       fetch(`http://localhost:9000/baskets`,{
         method: 'POST',
@@ -127,6 +101,7 @@ let customerBasket = {customerId: 1, products:[]};
       })
       .then((res)=>{ //does not work for login if you are already registered
         console.log(res)
+        console.log("Basket was created")
       })
     }
   
@@ -160,27 +135,13 @@ let customerBasket = {customerId: 1, products:[]};
       }  
       return errors; 
     };
-    
-    
-    const history = useHistory();
-
-
-    function register(){
-      //alert("Registration successfull!");
-      //history.push("/")
-    }
-    
-    function logout(){
-      setUser(undefined);
-      history.push("/")
-    }
-    
+  
  
 
     return (
       <div className="container">
     
-        <form onSubmit={HandleSubmit}>
+        <form onSubmit={handleSubmit2}>
           <h1>Registration</h1>
           <div className="ui divider"></div>
           <div className="ui form">
@@ -217,10 +178,10 @@ let customerBasket = {customerId: 1, products:[]};
               />
             </div>
             <p>{formErrors.email}</p>
-            {!isSubmit && <Button onClick={register}>Submit</Button>}
+            {!isSubmit && <Button >Submit</Button>}
             {isSubmit && <Button disabled>adding registration...</Button>}
             <Button onClick={history.goBack}>Cancel</Button>
-            <Button onClick={logout}>Log out</Button>
+            <Button onClick={handleLogout}>Log out</Button>
             
             
           </div>
