@@ -64,7 +64,7 @@ const TeaOverview = () => {
          <header id="header" className="teapage-header">
           <div className="headline-container">
             <h1 className="white_headline">{category} teas</h1>
-            <h3 className="white_headline">Discover our tasty {category.toLowerCase()} teas</h3>
+            <h3 className="white_headline">Discover our tasty {category.toLowerCase()==="all"?"":category.toLowerCase()} teas</h3>
           </div>
           <img src="/img/tea-leaves3.jpg" />
         </header>
