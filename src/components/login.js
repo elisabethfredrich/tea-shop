@@ -114,7 +114,7 @@ const handleSubmit2 = (e) => {
     // //setUserId(data.customerId)
 
     // updateUser(data.customerId)
-    // createBasket(data.customerId)
+    createBasket(customerId)
 
   })
   
@@ -178,6 +178,7 @@ const handleSubmit2 = (e) => {
 
     const createBasket = (userId) => {
       const basket = {customerId: userId, products:[]}
+      console.log(JSON.stringify(basket))
 
       fetch(`http://localhost:9000/baskets`,{
         method: 'POST',
@@ -186,6 +187,7 @@ const handleSubmit2 = (e) => {
       })
       .then((res)=>{ //does not work for login if you are already registered
         console.log(res)
+        console.log("Basket was created")
       })
     }
   
