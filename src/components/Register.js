@@ -61,7 +61,9 @@ const handleSubmit2 = (e) => {
   setFormErrors(validate(formValues));
   setIsSubmit(true);
   let customerName = formValues.firstName +" "+ formValues.lastName;
-  let data = {customerId, ...formValues} 
+  // let data = {customerId, ...formValues} 
+  let customerEmail = formValues.email
+  let data = {customerId, customerName, customerEmail}
 
   fetch(`http://localhost:9000/customers`,{
     method: 'POST',
