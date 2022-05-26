@@ -27,7 +27,7 @@ const Login = () =>{
     const callAPI = () =>{
         let customerEmail = formValueslogin.email;
         
-        fetch(`http://localhost:9000/customers/${customerEmail}`, {
+        fetch(`http://localhost:9000/customers/email/${customerEmail}`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             mode: 'cors'
