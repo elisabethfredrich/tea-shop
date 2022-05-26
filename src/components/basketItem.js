@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { Link} from "react-router-dom"
 
+import { UserContext } from "./userContext";
 
 
 
-const BasketItem = ({product,amount,user,updateHandler}) => {
 
+const BasketItem = ({product,amount,updateHandler}) => {
+
+const user = React.useContext(UserContext);  
 
 const deleteItem = () =>{
-    fetch(`http://localhost:9000/baskets/${user.customerId}/products/${product.productId}`,{
+    fetch(`http://localhost:9000/baskets/${user.userId}/products/${product.productId}`,{
         method: "DELETE",
         headers: {"Content-Type": "application/json"},
         mode: 'cors'
