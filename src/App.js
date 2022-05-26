@@ -23,7 +23,7 @@ const App = () => {
     const [userName, setUserName] = useState(undefined);
     const [basket, setBasket] = useState([]);
 
-        //grabbing the value
+        //grabbing the value of the userId when logged in
         useEffect(() => {
           const data = localStorage.getItem('THE_ID');
           setUserId(data);
@@ -35,6 +35,20 @@ const App = () => {
         if(userId!==""){
           localStorage.setItem('THE_ID', userId)}
     }, [userId]);    
+
+    /*
+//grabbing the basket value from local storage
+    useEffect(() => {
+      const data = localStorage.getItem('THE_BASKET');
+      setBasket(JSON.parse(data));
+      console.log("basket grabbed:", data);
+  }, []);
+
+  //setting the value of the basket from context in localstorage whenever it changes
+  useEffect(() => {
+      localStorage.setItem('THE_BASKET', JSON.stringify(basket))
+}, [basket]);        */
+
 
     return (
     <div className="App">

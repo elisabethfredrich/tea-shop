@@ -10,7 +10,7 @@ const Basket = () => {
   const [apiResponse, setState] = useState([]);
 
   const callAPI = () => {
-    if(user.userId===undefined || user.userId === "null" || user.userId === "undefined" || user.userId === null){
+    if(user.userId === undefined || user.userId === "null" || user.userId === "undefined" || user.userId === null){
       getBasketForAnynomousUser();
       return;
     }
