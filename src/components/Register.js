@@ -58,7 +58,6 @@ const handleSubmit2 = (e) => {
     setUser({customerId,customerName})
     setIsSubmit(false);
     createBasket(customerId)
-    goToHome();
   })
   
 }
@@ -160,7 +159,7 @@ const handleSubmit2 = (e) => {
             </div>
             <p>{formErrors.email}</p>
             {!isSubmit && <button className="btn" >Submit</button>}
-            {isSubmit && <p>{errorMessage}</p>}
+            {<p>{errorMessage}</p>}
             
           </div>
         </form>
