@@ -71,7 +71,7 @@ const getBasketForAnynomousUser = () => {
     return (
         <div id="basket-container">
           <header id="header-basket">
-        <h1>{user === undefined ? "Basket" :  user.firstName +"'s basket"}</h1>
+        <h1>{user.userId === undefined ? "Basket" :  user.userName +"'s basket"}</h1>
         </header>
         <div id="basket">
         <table className="table">

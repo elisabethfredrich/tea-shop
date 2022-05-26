@@ -13,7 +13,7 @@ const Home = () => {
   const images = [
     {
       greeting1: "Welcome stranger!",
-      greeting2: "Welcome old friend, " + user.firstName +" :)",
+      greeting2: "Welcome old friend, " + user.userName +" :)",
       img: "img/pouring_tea.jpg",
       id: 1
     },
@@ -51,7 +51,7 @@ const Home = () => {
               style={{cursor: item.targetURL !== undefined? "pointer" : ""}}
             >
                 <div>
-                  <h1 id="carousel-text">{user === undefined ? item.greeting1 : item.greeting2}</h1>
+                  <h1 id="carousel-text">{user.userId === undefined ? item.greeting1 : item.greeting2}</h1>
                 <img src={item.img} alt="carousel image"/>
                 </div>
             </div>

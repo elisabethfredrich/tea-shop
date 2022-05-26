@@ -180,12 +180,12 @@ const handleSubmit2 = (e) => {
             <p>{formErrors.email}</p>
             {!isSubmit && <Button >Submit</Button>}
             {isSubmit && <Button disabled>adding registration...</Button>}
-            <Button onClick={history.goBack}>Cancel</Button>
-            <Button onClick={handleLogout}>Log out</Button>
-            
             
           </div>
         </form>
+            <Button onClick={history.goBack}>Cancel</Button>
+            <Button onClick={handleLogout}>Log out</Button>
+            
       </div>
     );
   }
