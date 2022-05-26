@@ -22,6 +22,7 @@ const Basket = ({user}) => {
     ;
 }
 
+//for non-registered user
 const getProduct=(product) => {
   fetch(`http://localhost:9000/products/${product.productId}`, {
     method: "GET",
@@ -69,15 +70,16 @@ const getProduct=(product) => {
           <tr>
             <th scope="col"></th>
             <th scope="col">Item</th>
+            <th scope="col">Amount</th>
             <th scope="col">Price</th>
             <th scope="col"> </th>
           </tr>
         </thead>
         <tbody>
-        {basketProductsList.map((product) => (<BasketItem key={product.productId} product={product} user={user} updateHandler={callAPI}/>))}
+        {basketProductsList.map((product) => (<BasketItem key={product.product.productId} product={product.product} amount={product.amount} user={user} updateHandler={callAPI}/>))}
       </tbody>
       </table>
-      <h1>Total price: {basketProductsList.reduce((prev,product) => prev + parseInt(product.price.replaceAll(" dkk","")),0)} dkk</h1>
+      <h1>Total price: {basketProductsList.reduce((prev,product) => prev + parseInt(product.product.price.replaceAll(" dkk",""))*product.amount,0)} dkk</h1>
       </div>
     )
 }
