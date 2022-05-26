@@ -1,14 +1,69 @@
 import { Button } from "react-bootstrap";
 import React from "react";
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import { UserContext } from "./userContext";
 
 
 const ProductDetails = () => {
+  const { productId } = useParams();
 
-    const { productId } = useParams();
+  const [apiResponse, setState] = useState([]);
+  const [product, setProduct] = useState({});
+  const user = React.useContext(UserContext);  
 
-    const [apiResponse, setState] = useState([]);
+
+  const getProduct=() => {
+    fetch(`http://localhost:9000/products/${productId}`, {
+      method: "GET",
+      headers: {"Content-Type": "application/json"},
+      mode: 'cors'
+    })
+      .then(res => res.json())
+      .then(res=> {
+         /*  let newproduct = apiResponse;
+          newproduct.push(res); */
+          let array = user.basket;
+         // console.log(newproduct);
+          array.push({product:res,amount:1});
+          user.setBasket(array);
+          console.log(array);
+      }
+        )
+    ;
+  }
+
+  function addProductToBasket(){
+    if(user.userId===undefined){
+      let array = user.basket;
+
+        let index=array.findIndex((p)=>p.product.productId===product.productId)
+        if(index !==-1){
+          array[index].amount++;
+          user.setBasket(array)
+          return;
+        }
+      else{
+        getProduct(product);
+      }
+
+    }
+    else{
+    const product = {productId: productId};
+    fetch(`http://localhost:9000/baskets/${user.userId}/products`,{
+       method:'POST', 
+       headers: {"Content-Type": "application/json"}, 
+       body: JSON.stringify(product)
+     }).then(()=>{
+       console.log('Product is added to basket')
+     })
+    }}
+
+
+
+
+
 
     const callAPI = () => {
     fetch(`http://localhost:9000/products/${productId}`, { 
@@ -31,7 +86,6 @@ const ProductDetails = () => {
     setProduct(apiResponse);
   },[apiResponse])
 
-  const [product, setProduct] = useState({});
         
     return (
         <div>
@@ -45,7 +99,7 @@ const ProductDetails = () => {
             </p>
             <p className="card-text">{product.price}</p>
         
-            <button className="btn" onclick={()=> console.log()}>Add to basket</button>
+            <button className="btn" onClick={addProductToBasket}>Add to basket</button>
               </div>
         </div>
     )
