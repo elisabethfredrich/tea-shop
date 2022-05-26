@@ -3,33 +3,10 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from "./userContext";
 import { useHistory } from "react-router-dom";
 // import { Button } from "react-bootstrap";
-import styled from "styled-components";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 import { v4 as uuid } from 'uuid';
 
-const Register = () =>{
-
-      const Button = styled.button`
-  
-        border: none;
-        outline: none;
-        border-radius: 5px;
-        padding: 12px 16px;
-        background-color: #f1f1f1;
-        cursor: pointer;
-        margin: 0.2rem;
-        color: black;
-      /* Add a light grey background on mouse-over */
-      :hover{
-        background-color: #ddd;
-      }
-      /* Add a dark background to the active button */
-      active {
-        background-color: #666;
-        color: white;
-      }
-      `;
-   
+const Register = () =>{   
 
   const history = useHistory();
   const [formErrors, setFormErrors] = useState({});
@@ -146,7 +123,7 @@ const handleSubmit2 = (e) => {
       <div className="container">
     
         <form onSubmit={handleSubmit2}>
-          <h1>Registration</h1>
+          <h1 className="headline">Registration</h1>
           <div className="ui divider"></div>
           <div className="ui form">
             <div className="field">
@@ -182,12 +159,12 @@ const handleSubmit2 = (e) => {
               />
             </div>
             <p>{formErrors.email}</p>
-            {!isSubmit && <Button >Submit</Button>}
+            {!isSubmit && <button className="btn" >Submit</button>}
             {isSubmit && <p>{errorMessage}</p>}
             
           </div>
         </form>
-            <Button onClick={goToHome}>Cancel</Button>
+            <button className="btn" onClick={goToHome}>Cancel</button>
             
       </div>
     );

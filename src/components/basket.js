@@ -45,7 +45,7 @@ const Basket = () => {
 
     return (
         <div id="basket-container">
-          <header id="header-basket">
+          <header className="basket-header">
         <h1>{user.userId === undefined ? "Basket" :  user.userName +"'s basket"}</h1>
         </header>
         <div id="basket">

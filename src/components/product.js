@@ -2,7 +2,6 @@ import { Card, Button } from "react-bootstrap";
 import React from "react";
 import {Link} from "react-router-dom"
 import { useHistory } from "react-router-dom";
-import styled from "styled-components";
 
 import { UserContext } from "./userContext";
 
@@ -12,27 +11,6 @@ const Product = ({product}) => {
 
   const user = React.useContext(UserContext);  
   let history = useHistory();
-  
-  const Button = styled.button`
-  
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  padding: 12px 16px;
-  background-color: #f1f1f1;
-  cursor: pointer;
-  margin: 0.2rem;
-  color: black;
-/* Add a light grey background on mouse-over */
-:hover{
-  background-color: #ddd;
-}
-/* Add a dark background to the active button */
-active {
-  background-color: #666;
-  color: white;
-}
-`;
 
 
   function moveToProductDetails(productId){
@@ -113,8 +91,8 @@ active {
         <div className="card-body">
             <h4 className="card-title">{product.productName}</h4>
             <p className="card-text">{product.price}</p>
-            <Button onClick={() => addProductToBasket(product.productId)}>Add to basket</Button>
-            <Button onClick={() => moveToProductDetails(product.productId)}>Read more</Button>
+            <button className="btn" onClick={() => addProductToBasket(product.productId)}>Add to basket</button>
+            <button className="btn" onClick={() => moveToProductDetails(product.productId)}>Read more</button>
 
             {/* Another way to make the buttons: */}
             {/* <Link className="btn" to={`/products/${product.productName.replaceAll(" ", "")}`}>Read more</Link> */}

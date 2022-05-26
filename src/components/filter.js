@@ -1,35 +1,13 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useState } from 'react';
-import styled from "styled-components";
 
 
-const Filter = ({handler}) => {
-  const Button = styled.button`
-  
-      border: none;
-      outline: none;
-      border-radius: 5px;
-      padding: 12px 16px;
-      background-color: #f1f1f1;
-      cursor: pointer;
-      margin: 0.2rem;
-      color: black;
-    /* Add a light grey background on mouse-over */
-    :hover{
-      background-color: #ddd;
-    }
-    /* Add a dark background to the active button */
-    :active {
-      background-color: #666;
-      color: white;
-    }
-    `;
-  
+const Filter = ({handler}) => {  
   const FilterButton = ({filter}) => {
     
     return (
-      <Button className="btn btn-1" onClick={ () => handler(`${filter}`)} >{filter}</Button>
+      <button className="btn btn-1" onClick={ () => handler(`${filter}`)} >{filter}</button>
     )
   }
   const FilterOption = ({filter}) => {

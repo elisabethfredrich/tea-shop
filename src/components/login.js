@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "./userContext";
 
 const Login = () =>{
+
     const [formValueslogin, setFormValueslogin] = useState("");
     const [formErrorslogin, setFormErrorslogin] = useState({});
     const [isLoginSubmit, setLoginIsSubmit] = useState(false); 
@@ -81,7 +82,7 @@ const Login = () =>{
 return (
 <div className="container">
 <form onSubmit={HandleSubmitLogin2}>
-<h1>Login here:</h1>
+<h1 className="headline">Login here</h1>
 <div className="ui divider"></div>
 <div className="ui form"></div>
 <div className="field">
@@ -106,10 +107,10 @@ return (
   />
 </div>
 <p>{formErrorslogin.email}</p>
-<Button onClick={HandleSubmitLogin2}>Log in</Button>
+<button className="btn" onClick={HandleSubmitLogin2}>Log in</button>
 </form>
-<Button onClick={handleLogout}>Log out</Button>
-<Button onClick={goToRegister}>Register here</Button>
+<button className="btn" onClick={handleLogout}>Log out</button>
+<button className="btn" onClick={goToRegister}>Register here</button>
 </div>
 );
 

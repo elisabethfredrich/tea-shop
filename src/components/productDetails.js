@@ -45,7 +45,7 @@ const ProductDetails = () => {
             </p>
             <p className="card-text">{product.price}</p>
         
-            <Button onclick={()=> console.log()}>Add to basket</Button>
+            <button className="btn" onclick={()=> console.log()}>Add to basket</button>
               </div>
         </div>
     )
