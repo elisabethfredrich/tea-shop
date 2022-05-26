@@ -44,6 +44,8 @@ const {userId, userName} = useContext(UserContext);
 const initialState = {customerId:userId,customerName:userName}
 const [user,setUser] = useState(initialState);
 
+let [errorMessage,setErrorMessage] = useState("")
+
 
 const handleLogin = () => {
   setUserId(user.customerId);
@@ -55,7 +57,6 @@ useEffect(()=>{
   console.log('User was updated')
 },[user])
 
-
 const handleSubmit2 = (e) => {
   e.preventDefault();
   setFormErrors(validate(formValues));
@@ -65,18 +66,22 @@ const handleSubmit2 = (e) => {
   let customerEmail = formValues.email
   let data = {customerId, customerName, customerEmail}
 
+
   fetch(`http://localhost:9000/customers`,{
     method: 'POST',
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(data)
   })
   .then((res)=>{ //does not work for login if you are already registered
-    if(res.status >= 400) {throw new Error("Server responds with error!")}
+    if(res.status >= 400) {
+      setErrorMessage("User is already registered. Please type in something else.")
+      throw new Error("Server responds with error!")
+    }
     console.log('new customer added', JSON.stringify(formValues))
     setUser({customerId,customerName})
     setIsSubmit(false);
     createBasket(customerId)
-
+    goToHome();
   })
   
 }
@@ -133,7 +138,7 @@ const handleSubmit2 = (e) => {
       return errors; 
     };
   
-    function cancel(){
+    function goToHome(){
       history.push("/");
     }
 
@@ -178,11 +183,11 @@ const handleSubmit2 = (e) => {
             </div>
             <p>{formErrors.email}</p>
             {!isSubmit && <Button >Submit</Button>}
-            {isSubmit && <Button disabled>adding registration...</Button>}
+            {isSubmit && <p>{errorMessage}</p>}
             
           </div>
         </form>
-            <Button onClick={cancel}>Cancel</Button>
+            <Button onClick={goToHome}>Cancel</Button>
             
       </div>
     );
