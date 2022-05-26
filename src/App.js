@@ -19,13 +19,6 @@ import { useState, useEffect } from 'react';
 
 const App = () => {
 
-
- /*    const [formValues, setFormValues] = useState(""); 
-    const [isSubmit, setIsSubmit] = useState(false); 
-     */
-
-    const [user, setUser] = useState({undefined});
-
     const [userId, setUserId] = useState(undefined);
     const [userName, setUserName] = useState(undefined);
 
@@ -39,10 +32,8 @@ const App = () => {
               <UserContext.Provider value={{userId, setUserId, userName, setUserName}}>
 
               <Switch>
-            {/*   <userContext.Provider value={{setIsSubmit, setFormValues, formValues, isSubmit}}> */}
-                <Route path="/basket" component={() => <Basket user={user}/>} />
-                <Route path="/search" component={Search} />
-                <Route path="/login" component={() => <LoginForm setUser={setUser}/>}/>
+                <Route path="/basket" component={() => <Basket />} />
+                <Route path="/login" component={() => <LoginForm />}/>
                 <Route path="/about" component={About}/>
                 <Route path="/terms" component={Terms}/>
                 <Route path="/privacy" component={Privacy}/>
@@ -50,9 +41,8 @@ const App = () => {
                 <Route path="/products/:productId" component={() => <ProductDetails />} />
                 {/* the thing below with the props ensures that the router can differientate between /white and /black and
                 that it knows to update the TeaOverviw based on that. Solution found here: https://stackoverflow.com/questions/62836374/react-router-does-not-update-component-if-url-parameter-changes */}
-                <Route path="/:category" render={(props) => ( <TeaOverview user={user} key={props.match.params.category} {...props} />)} />
-                <Route exact path="/" component={() => <Home user={user}/>} />
-   {/*              </userContext.Provider> */}
+                <Route path="/:category" render={(props) => ( <TeaOverview key={props.match.params.category} {...props} />)} />
+                <Route exact path="/" component={() => <Home />} />
               
               </Switch>
 
@@ -64,21 +54,5 @@ const App = () => {
     </div>
   )};
 
-/* 
-function Home() {
-return <h2>Home</h2>;
-}
- */
-
-
-
-function Search() {
-  return <h2>Search</h2>;
-}
-
-function User() {
-    const value = React.useContext(UserContext);  
-    return <h1>{value}</h1>;
-}
 
 export default App;
