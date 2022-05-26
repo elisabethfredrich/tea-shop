@@ -4,5 +4,7 @@ export const UserContext = createContext({
     userId:undefined,
     setUserId: (id) => {},
     userName:undefined,
-    setUserName: (name) => {}
+    setUserName: (name) => {},
+    basket:[],
+    setBasket:(basket) => {}
 });

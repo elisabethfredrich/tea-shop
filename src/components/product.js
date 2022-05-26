@@ -59,20 +59,17 @@ active {
   
   function addProductToBasket(productId){
     if(user.userId===undefined){
-      let array = JSON.parse(localStorage.getItem("basket"))
-      if(array===null) {array = []}
-      if(array.length > 0){
-        let containsId = false;
-        for(let i=0;i<array.length; i++){
-            if (array[i].productId === productId){
-            array[i].amount += 1;
-            containsId = true;
-            break;}
-        }
-      if (containsId ===false) array.push({productId:productId, amount:1})
+      let array = user.basket;
+      let findProductIfAlreadyThere = array.filter(product => product.productId === productId)
+      if(findProductIfAlreadyThere.length > 0){
+        findProductIfAlreadyThere[0].amount++;
+        // console.log(findProductIfAlreadyThere[0].amount); 
+        console.log(array)
+        return;
       }
-      console.log(array);
-      localStorage.setItem("basket", JSON.stringify(array));
+      array.push({productId:productId,amount:1})
+      console.log(array)
+      user.setBasket(array)
       return;
     }
 
