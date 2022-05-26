@@ -52,9 +52,6 @@ const callAPI = () => {
         </ul>
       </div>
       <div id="icons-nav">
-        <div className="search"><Link type="submit" to="/search">
-            <img src="/img/icons/search.png" alt="search"/>
-      </Link></div>
       <div className="Login"><Link to="/login">
           <img src="/img/icons/profile.png" alt="login"/>
       </Link></div>

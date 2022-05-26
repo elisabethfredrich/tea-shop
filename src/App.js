@@ -20,13 +20,6 @@ import { useState, useEffect } from 'react';
 
 const App = () => {
 
- 
-    const productTest = {"productId":1,"productName":"Sencha tea","categories":["green","conventional","30-50 DKK"],"price":"32 dkk","image":"/img/greenteas/sencha.jpg","description":"Sencha is a mild and soft green tea from China. It is often used in various green tea blends because it is mild and can therefore easily be combined with various ingredients such as fruits, berries and herbs."};
-    const categoriesTest = [{"categoryName":"Green tea"}, {"categoryName":"Black tea"}, {"categoryName":"White tea"},{"categoryName":"Herbal tea"},{"categoryName":"Rooibos tea"}];
-    const categoryTest = {"categoryName":"Green tea"};
-    const productsTest = [{"productId":1,"productName":"Sencha tea","categories":["green","conventional","30-50 DKK"],"price":"32 dkk","image":"/img/greenteas/sencha.jpg","description":"Sencha is a mild and soft green tea from China. It is often used in various green tea blends because it is mild and can therefore easily be combined with various ingredients such as fruits, berries and herbs."},
-    {"productId":2,"productName":"Organic Matcha Tea","categories":["green","organic","30-50 DKK"],"price":"35 dkk","image":"/img/greenteas/matcha.png","description":"Matcha is a fine, green tea powder and is used for the traditional Japanese tea ceremony. Matcha is made from the finest top leaves of the plant and is rich on A-, E- and C vitamins, minerals and polyphenols. It is said that Matcha is even healthier than other teas because the whole tea leaves are used."}];
-
 
  /*    const [formValues, setFormValues] = useState(""); 
     const [isSubmit, setIsSubmit] = useState(false); 
@@ -43,7 +36,7 @@ const App = () => {
 
               <Switch>
             {/*   <userContext.Provider value={{setIsSubmit, setFormValues, formValues, isSubmit}}> */}
-                <Route path="/basket" component={() => <Basket basketList={productsTest} user={user}/>} />
+                <Route path="/basket" component={() => <Basket user={user}/>} />
                 <Route path="/search" component={Search} />
                 <Route path="/login" component={() => <LoginForm setUser={setUser}/>}/>
                 <Route path="/about" component={About}/>
