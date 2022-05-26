@@ -84,17 +84,17 @@ active {
   function addProductToBasket(productId){
     if(user.userId===undefined){
       let array = user.basket;
-     // console.log(array);
-      let findProductIfAlreadyThere = array.filter(product => product.productId == productId)
-      if(findProductIfAlreadyThere.length > 0){
-        findProductIfAlreadyThere[0].amount++;
-        // console.log(findProductIfAlreadyThere[0].amount); 
-      //  console.log(array);
-        return;
-      }
+
+        let index=array.findIndex((p)=>p.product.productId===productId)
+        if(index !==-1){
+          array[index].amount++;
+          user.setBasket(array)
+          return;
+        }
       else{
         getProduct(product);
       }
+
     }
     else{
     const product = {productId: productId};

@@ -10,6 +10,11 @@ const Basket = () => {
   const [apiResponse, setState] = useState([]);
 
   const callAPI = () => {
+    if(user.userId === undefined){
+      setState(user.basket)
+      return;
+    }
+
     if(user.userId !== undefined){
    
     console.log("userid:"+user.customerId)
@@ -26,18 +31,6 @@ const Basket = () => {
     ;
 }}
 
-//for non-registered user
-
-
-/* const getBasketForAnynomousUser = () => {
-  console.log(user.basket)
-  const basketArray = user.basket;
-  setState([]);
-  basketArray.forEach(product => {
-    getProduct(product);
-  })
-}
- */
   useEffect(() => {
     callAPI();
   }, [])
