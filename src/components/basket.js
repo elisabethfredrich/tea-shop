@@ -10,7 +10,7 @@ const Basket = () => {
   const [apiResponse, setState] = useState([]);
 
   const callAPI = () => {
-    if(user.userId===undefined){
+    if(user.userId===undefined || user.userId === "null" || user.userId === "undefined" || user.userId === null){
       getBasketForAnynomousUser();
       return;
     }
@@ -71,7 +71,7 @@ const getBasketForAnynomousUser = () => {
     return (
         <div id="basket-container">
           <header id="header-basket">
-        <h1>{user.userId === undefined ? "Basket" :  user.userName +"'s basket"}</h1>
+        <h1>{user.userId === undefined || user.userId === "null" || user.userId === "undefined" || user.userId === null ? "Basket" :  user.userId +"'s basket"}</h1>
         </header>
         <div id="basket">
         <table className="table">

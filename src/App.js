@@ -23,6 +23,18 @@ const App = () => {
     const [userName, setUserName] = useState(undefined);
     const [basket, setBasket] = useState([]);
 
+        //grabbing the value
+        useEffect(() => {
+          const data = localStorage.getItem('THE_ID');
+          setUserId(data);
+          console.log("id grabbed:", data);
+      }, []);
+
+      //setting the value of the userName in localstorage whenever it changes
+      useEffect(() => {
+        if(userId!==""){
+          localStorage.setItem('THE_ID', userId)}
+    }, [userId]);    
 
     return (
     <div className="App">
