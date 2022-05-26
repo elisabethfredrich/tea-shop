@@ -2,11 +2,15 @@ import { Card, Button } from "react-bootstrap";
 import React from "react";
 import {Link} from "react-router-dom"
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
 import styled from "styled-components";
 
-const Product = ({product,user}) => {
+import { UserContext } from "./userContext";
 
+import { useState, useContext, useEffect} from 'react';
+
+const Product = ({product}) => {
+
+  const user = React.useContext(UserContext);  
   let history = useHistory();
   
   const Button = styled.button`
@@ -54,7 +58,7 @@ active {
   // }
   
   function addProductToBasket(productId){
-    if(user===undefined){
+    if(user.userId===undefined){
       let array = JSON.parse(localStorage.getItem("basket"))
       if(array===null) {array = []}
 
@@ -66,7 +70,7 @@ active {
     }
 
     const product = {productId: productId};
-    fetch(`http://localhost:9000/baskets/${user.customerId}/products`,{
+    fetch(`http://localhost:9000/baskets/${user.userId}/products`,{
        method:'POST', 
        headers: {"Content-Type": "application/json"}, 
        body: JSON.stringify(product)

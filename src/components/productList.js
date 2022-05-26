@@ -2,12 +2,12 @@ import { CardDeck } from "react-bootstrap";
 import React from "react";
 import Product from './product';
 
-const ProductList = ({products,user}) => {
+const ProductList = ({products}) => {
     return (
         <div className="card-container">
         <div className="flex-card-wrapper">
             <CardDeck>
-                {products.map((product) => (<Product key={product.productId} product={product} user={user}/>))}
+                {products.map((product) => (<Product key={product.productId} product={product}/>))}
             </CardDeck>
         </div></div>
     )

@@ -1,16 +1,18 @@
 import React from "react";
 import BasketItem from './basketItem';
+import { UserContext } from "./userContext";
 
 import { useState, useContext, useEffect} from 'react';
 
-const Basket = ({user}) => {
+const Basket = () => {
 
+  const user = React.useContext(UserContext);  
   const [apiResponse, setState] = useState([]);
 
   const callAPI = () => {
     console.log("userid:"+user.customerId)
 
-    fetch(`http://localhost:9000/baskets/${user.customerId}/products`, {
+    fetch(`http://localhost:9000/baskets/${user.userId}/products`, {
       method: "GET",
       headers: {"Content-Type": "application/json"},
       mode: 'cors'
@@ -41,7 +43,7 @@ const getProduct=(product) => {
 
 
   useEffect(() => {
-    if(user===undefined){
+    if(user.userId===undefined){
       const basketArray = JSON.parse(localStorage.getItem("basket"));
       basketArray.forEach(product => {
         getProduct(product)
@@ -61,10 +63,9 @@ const getProduct=(product) => {
   const initialState = apiResponse;
   const [basketProductsList, setList] = useState(initialState);
 
-
     return (
         <div>
-        <h1>{user === undefined ? "Basket" :  user.firstName +"'s basket"}</h1>
+        <h1>{user.userId === undefined ? "Basket" :  user.userName +"'s basket"}</h1>
         <table className="table">
         <thead>
           <tr>

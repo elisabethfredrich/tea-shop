@@ -3,69 +3,11 @@ import { Link, useHistory } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import React from "react"
-import { useState, useContext, useEffect} from 'react';
-import { userContext } from "./userContext";
+import { useState, useEffect, useContext } from 'react';
+import { UserContext } from "./userContext";
 
-const Home = ({user}) => {
-
-  // const [apiResponse, setState] = useState([]);
-
-  // const callAPI = () => {
-  //   fetch(`http://localhost:9000/customers/${userId}`, {
-  //     method: "GET",
-  //     headers: {"Content-Type": "application/json"},
-  //     mode: 'cors'
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => setState(res));
-  //     console.log(apiResponse)
-  //   ;
-  // }
-  
-  //   useEffect(() => {
-  //     callAPI();
-  //   }, [])
-
-  //   useEffect(()=>{
-  //     setUser(apiResponse);
-  //   },[apiResponse])
-  
-  //   const [user, setUser] = useState({});
-  
-
-
-
-/*   const msg = useContext(userContext); 
-
-  const [isSubmit, setIsSubmit, formValues, setFormValues] = useContext(userContext);  */
-  /* const [isSubmit, setIsSubmit] = useState(false);
-  const [formValues, setFormValues] = useState(" ");
-   */
-  
-  
- /*  const userName = () =>{
-      return formValues.firstName
-    } 
-  
-  
-  let userGreeting = () =>{
-      return <h1>Welcome to the world of ITEa!</h1>
-  }; 
-  
-  let guestGreeting = () =>{
-      return <h1>Hello </h1>
-  }
-  
-  let greeting = (isSubmit) =>{
-      if (isSubmit){
-          return userGreeting
-      }
-      else{
-          return guestGreeting
-      }
-  }; 
-   */
-  
+const Home = () => {
+  const user = React.useContext(UserContext);  
 
   const history = useHistory();
   const images = [
@@ -91,11 +33,9 @@ const Home = ({user}) => {
   ];
   return (
     <div className="App">
-  {/*      <div>
-    Home
-    <div>{greeting}</div>
-    </div> */}
-    <h1>{user === undefined ? "Welcome stranger!" : "Welcome old friend, " + user.firstName +" :)"}</h1>
+
+    <h1>{user.userId === undefined ? "Welcome stranger!" : "Welcome old friend, " + user.userName +" :)"}</h1>
+    
         <Carousel autoPlay infiniteLoop showArrows={true} showThumbs={false}>
           {images.map((item) => (
             <div key={item.id}
