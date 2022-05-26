@@ -11,11 +11,13 @@ import About from "./components/about";
 import Terms from "./components/terms";
 import Privacy from "./components/privacy";
 import Contact from "./components/contact";
+import Register from "./components/registration";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "./style.css";
 import { UserContext } from "./components/userContext";
 import { useState, useEffect } from 'react';
+
 
 const App = () => {
 
@@ -35,6 +37,7 @@ const App = () => {
               <Switch>
                 <Route path="/basket" component={() => <Basket />} />
                 <Route path="/login" component={() => <LoginForm />}/>
+                <Route path="/register" component={() => <Register/>}/>
                 <Route path="/about" component={About}/>
                 <Route path="/terms" component={Terms}/>
                 <Route path="/privacy" component={Privacy}/>
