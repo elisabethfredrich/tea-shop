@@ -60,7 +60,7 @@ const Product = ({product}) => {
   }
 
   function addProductToBasket(productId){
-    if(user.userId===undefined){
+    if(user.userId === undefined || user.userId === "null" || user.userId === "undefined" || user.userId === null){
       let array = user.basket;
 
         let index=array.findIndex((p)=>p.product.productId===productId)

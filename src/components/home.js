@@ -51,7 +51,7 @@ const Home = () => {
               style={{cursor: item.targetURL !== undefined? "pointer" : ""}}
             >
                 <div>
-                  <h1 id="carousel-text">{user.userId === undefined ? item.greeting1 : item.greeting2}</h1>
+                  <h1 id="carousel-text">{user.userId === undefined || user.userId === "null" || user.userId === "undefined" || user.userId === null ? item.greeting1 : item.greeting2}</h1>
                 <img src={item.img} alt="carousel image"/>
                 </div>
             </div>

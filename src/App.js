@@ -25,6 +25,39 @@ const App = () => {
     const [userName, setUserName] = useState(undefined);
     const [basket, setBasket] = useState([]);
 
+    const getNameForGreeting = (id) => {
+      if(userId===undefined){return;}
+      fetch(`http://localhost:9000/customers/${id}`, { 
+        method : "GET",
+        mode: 'cors'
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      setUserName(res.customerName)
+      console.log(res.customerName)
+    })};
+  
+    // useEffect(() =>{
+    //   getNameForGreeting()
+    // }, [])
+
+        //grabbing the value of the userId when logged in
+        useEffect(() => {
+          let data = localStorage.getItem('THE_ID');
+          if(data === undefined || data === "null" || data === "undefined" || data === null) {data=undefined}
+          console.log(data)
+          setUserId(data);
+          getNameForGreeting(data);
+          console.log("id grabbed:", data);
+      }, []);
+
+      //setting the value of the userName in localstorage whenever it changes
+      useEffect(() => {
+        if(userId!==undefined){
+          localStorage.setItem('THE_ID', userId)}
+    }, [userId]);    
+
 
     return (
     <div className="App">
