@@ -1,5 +1,6 @@
 import React from "react"
 import {BrowserRouter, Route, Switch, NavLink, Link} from "react-router-dom"
+import "./style.css";
 import ProductDetails from './components/productDetails';
 import NavigationBar from './components/NavigationBar';
 import Footer from './components/footer';
@@ -13,7 +14,6 @@ import Privacy from "./components/privacy";
 import Contact from "./components/contact";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import "./style.css";
 
 import { useState, useEffect } from 'react';
 
@@ -31,7 +31,7 @@ const App = () => {
     return (
     <div className="App">
        <BrowserRouter>
-        <div>
+        <div id="app-main">
               <NavigationBar/>
 
               <Switch>

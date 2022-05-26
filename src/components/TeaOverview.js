@@ -60,7 +60,7 @@ const TeaOverview = ({user}) => {
     };
 
     return (
-        <div>
+        <div id='main-content'>
          <header id="header" className="teapage-header">
           <div className="headline-container">
             <h1 className="white_headline">{category} teas</h1>
