@@ -58,17 +58,6 @@ active {
   // }
   
   function addProductToBasket(productId){
-    // if(user.userId===undefined){
-    //   let array = JSON.parse(localStorage.getItem("basket"))
-    //   if(array===null) {array = []}
-
-    //   array.push({productId:productId})
-
-    //   console.log(array);
-    //   localStorage.setItem("basket", JSON.stringify(array));
-    //   return;
-    // }
-
     if(user.userId===undefined){
       let array = user.basket;
       let findProductIfAlreadyThere = array.filter(product => product.productId === productId)
@@ -95,18 +84,18 @@ active {
     }
 
     return (
-        <Card className="card" style={{ minWidth: '300px', border: 'none' }}>
-        <Card.Img variant="top" img="true" src={product.image} alt="Card image"/>
-        <Card.Body>
-            <Card.Title>{product.productName}</Card.Title>
-            <Card.Text>{product.price}</Card.Text>
+        <div className="card">
+        <img variant="top" img="true" src={product.image} alt="Card image"/>
+        <div className="card-body">
+            <h4 className="card-title">{product.productName}</h4>
+            <p className="card-text">{product.price}</p>
             <Button onClick={() => addProductToBasket(product.productId)}>Add to basket</Button>
             <Button onClick={() => moveToProductDetails(product.productId)}>Read more</Button>
 
             {/* Another way to make the buttons: */}
             {/* <Link className="btn" to={`/products/${product.productName.replaceAll(" ", "")}`}>Read more</Link> */}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     )
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Terms = () => {
   return (
-    <div>
+    <div className="info-page">
         <h1>ITea's Terms & Conditions</h1>
 
       <p>

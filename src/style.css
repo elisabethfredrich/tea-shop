@@ -2,12 +2,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Ubuntu:wght@400;500&display=swap");
 
 body {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Ubuntu", sans-serif !important;
   font-weight: 400;
   position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+#app-main{
+  min-height: 100vh;
+  display: flex;
+  flex-flow: row wrap;
+
 }
 
 p {
@@ -20,10 +27,13 @@ h1 {
   font-weight: 400;
 }
 
-a {
-  color: black;
+.footer-link {
+  color: rgba(0,0,0,.7);
 }
 
+.footer-link:hover{
+  color: black;
+}
 
 /* Index carousel*/
 .carousel {
@@ -54,50 +64,27 @@ a {
 /*product cards*/
 
 .card {
-  border: none;
-  min-width: 300px;
-  display: none;
+  border: none !important;
+  min-width: 15rem !important;
+  max-width: 20rem;
 }
 
-#recommendations, .recommendations {
-  display: flex;
-  flex-direction: row;
-  margin-left: 5rem;
-  margin-right: 5rem;
-  flex-flow: column wrap;
-  margin-top: 5rem;
-  justify-items: center;
-}
-
-.recommendation {
-  margin: 3rem;
-  max-width: 20px;
-}
-
-.card-deck-recommendations {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  flex-flow: row wrap;
-  align-items: flex-end;
-}
 
 .card-deck {
-  column-gap: 100px;
-  row-gap: 50px;
-  overflow: hidden;
-  max-width: 60rem;
-  justify-content: center;
-  align-items: flex-end;
+  column-gap: 100px !important;
+  row-gap: 50px !important;
+  overflow: hidden !important;
+  max-width: 60rem !important;
+  align-items: flex-end !important;
 }
 
 .card-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 200px;
-  overflow: hidden;
-  margin-left: 1rem;
-  flex-grow: 1;
+  display: flex !important;
+  justify-content: center !important;
+  margin-bottom: 200px !important;
+  overflow: hidden !important;
+  margin-left: 1rem !important;
+  flex-grow: 1 !important;
 }
 
 
@@ -121,18 +108,9 @@ header img {
   display: block;
 }
 
-#previous {
-  background-color: #f1f1f1;
-  color: black;
-  border-radius: 50%;
-  text-decoration: none;
-  padding: 8px 16px;
-  margin-top: 5rem;
-  margin-left: 5rem;
-}
 
 /* Style the buttons */
-.btn, #search {
+.btn {
   border: none;
   outline: none;
   padding: 12px 16px;
@@ -158,7 +136,6 @@ header img {
 #main-content {
   display: flex;
   flex-flow: row wrap;
-  padding: 1rem;
 }
 
 #myBtnContainer {
@@ -190,11 +167,11 @@ header img {
 }
 
 .product-image {
-  margin-left: 2rem;
+  margin-left: 2rem !important;
 }
 
 .product-image img {
-  max-width: 30rem;
+  max-width: 30rem !important;
 }
 
 .product-recommendations {
@@ -215,11 +192,12 @@ header img {
   
 }
 
-#nav-placeholder{
+#nav-container{
   position: sticky;
   top:0px;
   z-index: 1;
-}
+display: block;
+width:100%;}
 
 .nav-item {
   margin: 0.5rem;
@@ -230,7 +208,7 @@ header img {
   width: auto;
 }
 
-.navbar-brand img {
+.navbar-brand-logo img {
   height: 2.4rem;
 }
 
@@ -246,7 +224,7 @@ header img {
     background-color: #f2f2f2;
   }
 
-  .navbar-brand {
+  .navbar-brand-logo {
     display: none;
   }
 }
@@ -262,7 +240,7 @@ header img {
 
 }
 
-.search img,
+
 .Basket img,
 .Login img {
   height: 1.4rem;
@@ -280,7 +258,7 @@ header img {
   align-items: flex-end;
 }
 
-.Login, .Basket, .search {
+.Login, .Basket {
   margin-left: 3px;
 }
 
@@ -288,10 +266,6 @@ header img {
 #noSearchResults {
   margin-top: 5rem;
   text-align: center;
-}
-
-#search img {
-  width: 1.5rem;
 }
 
 #search-header {
@@ -319,6 +293,21 @@ header img {
 }
 
 /* basket*/
+
+#basket-container{
+  display: block;
+  width:100%;
+}
+
+td{
+  align-self: center;
+  /* padding: 10px !important;
+  padding-top: 20px !important; */
+}
+
+
+
+
 #header-basket,
 #basket {
   padding: 2rem;
@@ -354,14 +343,25 @@ header img {
 .info-page {
   margin: 2rem;
   max-width: 50rem;
+  display: block;
 }
 
 /* footer*/
-#footer-placeholder {
+
+#footer-container{
   width: 100%;
+  display: block;
   background-color: #f2f2f2;
-  align-self: flex-end;
   padding-top: 2rem;
   padding-left: 1rem;
   margin-top: auto;
 }
+
+.greeting{
+  padding: 2rem;
+}
+
+
+
+
+

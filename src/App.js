@@ -27,7 +27,7 @@ const App = () => {
     return (
     <div className="App">
        <BrowserRouter>
-        <div>
+        <div id="app-main">
               <NavigationBar/>
 
               <UserContext.Provider value={{userId, setUserId, userName, setUserName, basket, setBasket}}>
