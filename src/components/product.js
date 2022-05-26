@@ -56,23 +56,47 @@ active {
 
   //   ;
   // }
-  
+
+
+  const [apiResponse, setState] = useState([]);
+
+
+  const getProduct=(product) => {
+    fetch(`http://localhost:9000/products/${product.productId}`, {
+      method: "GET",
+      headers: {"Content-Type": "application/json"},
+      mode: 'cors'
+    })
+      .then(res => res.json())
+      .then(res=> {
+         /*  let newproduct = apiResponse;
+          newproduct.push(res); */
+          let array = user.basket;
+         // console.log(newproduct);
+          array.push({product:res,amount:1});
+          user.setBasket(array);
+          console.log(array);
+      }
+        )
+    ;
+  }
+
   function addProductToBasket(productId){
     if(user.userId===undefined){
       let array = user.basket;
-      let findProductIfAlreadyThere = array.filter(product => product.productId === productId)
+     // console.log(array);
+      let findProductIfAlreadyThere = array.filter(product => product.productId == productId)
       if(findProductIfAlreadyThere.length > 0){
         findProductIfAlreadyThere[0].amount++;
         // console.log(findProductIfAlreadyThere[0].amount); 
-        console.log(array)
+      //  console.log(array);
         return;
       }
-      array.push({productId:productId,amount:1})
-      console.log(array)
-      user.setBasket(array)
-      return;
+      else{
+        getProduct(product);
+      }
     }
-
+    else{
     const product = {productId: productId};
     fetch(`http://localhost:9000/baskets/${user.userId}/products`,{
        method:'POST', 
@@ -81,7 +105,7 @@ active {
      }).then(()=>{
        console.log('Product is added to basket')
      })
-    }
+    }}
 
     return (
         <div className="card">
