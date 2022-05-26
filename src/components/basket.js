@@ -64,8 +64,11 @@ const getProduct=(product) => {
   const [basketProductsList, setList] = useState(initialState);
 
     return (
-        <div>
-        <h1>{user.userId === undefined ? "Basket" :  user.userName +"'s basket"}</h1>
+        <div id="basket-container">
+          <header id="header-basket">
+        <h1>{user === undefined ? "Basket" :  user.firstName +"'s basket"}</h1>
+        </header>
+        <div id="basket">
         <table className="table">
         <thead>
           <tr>
@@ -80,7 +83,14 @@ const getProduct=(product) => {
         {basketProductsList.map((product) => (<BasketItem key={product.product.productId} product={product.product} amount={product.amount} user={user} updateHandler={callAPI}/>))}
       </tbody>
       </table>
+      <div id="check-out-wrapper">
+    <div id="check-out">
       <h1>Total price: {basketProductsList.reduce((prev,product) => prev + parseInt(product.product.price.replaceAll(" dkk",""))*product.amount,0)} dkk</h1>
+      </div>
+      </div>
+
+
+      </div>
       </div>
     )
 }

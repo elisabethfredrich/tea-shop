@@ -31,7 +31,7 @@ const callAPI = () => {
 
 
   return(
-    <div>
+    <div id="nav-container">
       <div id="logo-top-container"><Link className="navbar-brand-top" to="/">
           <img src="/img/Logo.png" alt="logo"/>
         </Link></div>

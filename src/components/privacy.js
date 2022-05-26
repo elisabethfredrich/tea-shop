@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const Privacy = () => {
   return (
-    <div>
+    <div className="info-page">
         <h1>ITea's Privacy Policy</h1>
       <p>
         This Privacy Policy describes how your personal information is
