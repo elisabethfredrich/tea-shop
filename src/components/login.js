@@ -62,9 +62,13 @@ let customerBasket = {customerId: 1, products:[]};
 /* let newCustomer = {customerId: 7, customerName: "Jane Doe", customerEmail: "janedoe@hotmail.com"}; */
 
 const { setUserId, setUserName } = useContext(UserContext);
+const {userId, userName} = useContext(UserContext);
 
-const initialState = {customerId:1,customerName:"Sofie Nielsen"}
+const initialState = {customerId:userId,customerName:userName}
 const [userTest,setUserTest] = useState(initialState);
+
+// const [id,setId] = useState(userId)
+// const [name,setName] = useState(userName)
 
 
 const handleLogin = () => {
@@ -78,24 +82,21 @@ const handleLogout = () => {
   setUserName(undefined);
 }
 
+useEffect(()=>{
+  handleLogin();
+  console.log('User was updated')
+},[userTest])
+
+
 const handleSubmit2 = (e) => {
   e.preventDefault();
   setFormErrors(validate(formValues));
   setIsSubmit(true);
 
   let customerName = formValues.firstName +" "+ formValues.lastName;
-  // let email = formValues.email;
   let data = {customerId, ...formValues} 
 
-  console.log("user test before update:" + JSON.stringify(userTest))
-  // setUserTest(JSON.stringify({customerId, customerName}));
-  let updatedValue = {customerId:2,customerName:"Katrine Christensen"}
-  // console.log(updatedValue)
-  setUserTest({customerId, customerName})
-  console.log(userTest)
-  console.log("user test was updated to:" + JSON.stringify(userTest))
-  handleLogin();
-
+  
   fetch(`http://localhost:9000/customers`,{
     method: 'POST',
     headers: {"Content-Type": "application/json"},
@@ -103,9 +104,10 @@ const handleSubmit2 = (e) => {
   })
   .then((res)=>{ //does not work for login if you are already registered
     if(res.status >= 400) {throw new Error("Server responds with error!")}
-
+    
     // console.log("something happened")
-    // console.log('new customer added', JSON.stringify(formValues))
+    console.log('new customer added', JSON.stringify(formValues))
+    setUserTest({customerId,customerName})
     // console.log("Customer id: "+data.customerId)
     // setIsSubmit(false);
 
