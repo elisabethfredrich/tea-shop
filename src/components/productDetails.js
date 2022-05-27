@@ -1,16 +1,15 @@
-import { Button } from "react-bootstrap";
 import React from "react";
 import { useParams } from 'react-router-dom';
 import { UserContext } from "./userContext";
-
 import { useState, useContext, useEffect} from 'react';
 
 
 const ProductDetails = () => {
 
     const { productId } = useParams();
-    const user = React.useContext(UserContext);  
+    const user = useContext(UserContext);  
     const [apiResponse, setState] = useState([]);
+    const [product, setProduct] = useState({});
 
     const callAPI = () => {
     fetch(`http://localhost:9000/products/${productId}`, { 
@@ -21,23 +20,18 @@ const ProductDetails = () => {
         .then(res => setState(res));
     }
 
-
-
     function addProductToBasket(){
       if(user.userId===undefined){
         let array = user.basket;
-  
           let index=array.findIndex((p)=>p.product.productId===parseInt(productId))
           if(index !==-1){
             array[index].amount++;
             user.setBasket(array)
-            console.log(user.basket)
-            return;
           }
         else{
           getProduct();
         }
-  
+        console.log('Product has been added to basket')
       }
       else{
       const product = {productId: parseInt(productId)};
@@ -46,7 +40,7 @@ const ProductDetails = () => {
          headers: {"Content-Type": "application/json"}, 
          body: JSON.stringify(product)
        }).then((res)=>{
-         console.log('Product is added to basket')
+        console.log('Product has been added to basket')
        })
       }}
 
@@ -61,25 +55,20 @@ const ProductDetails = () => {
               let array = user.basket;
               array.push({product:res,amount:1});
               user.setBasket(array);
-              console.log(array);
-          }
-            )
-        ;
+          });
       }
 
 
-    useEffect(() =>{
-    callAPI();
-    },[])
+  useEffect(() =>{
+  callAPI();
+  },[])
 
   useEffect(()=>{
     setProduct(apiResponse);
   },[apiResponse])
-
-  const [product, setProduct] = useState({});
         
     return (
-        <div>
+        <div id="productView">
         <div className="product-image">
             <img src={product.image} alt="Card image" />
           </div>

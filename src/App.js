@@ -1,4 +1,5 @@
 import React from "react"
+import "./style.css";
 import {BrowserRouter, Route, Switch, NavLink, Link} from "react-router-dom"
 import ProductDetails from './components/productDetails';
 import NavigationBar from './components/NavigationBar';
@@ -13,10 +14,8 @@ import Privacy from "./components/privacy";
 import Contact from "./components/contact";
 import Register from "./components/Register";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
-import "./style.css";
 import { UserContext } from "./components/userContext";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 const App = () => {
@@ -43,8 +42,6 @@ const App = () => {
                 <Route path="/privacy" component={Privacy}/>
                 <Route path="/contact" component={Contact}/>
                 <Route path="/products/:productId" component={() => <ProductDetails />} />
-                {/* the thing below with the props ensures that the router can differientate between /white and /black and
-                that it knows to update the TeaOverviw based on that. Solution found here: https://stackoverflow.com/questions/62836374/react-router-does-not-update-component-if-url-parameter-changes */}
                 <Route path="/:category" render={(props) => ( <TeaOverview key={props.match.params.category} {...props} />)} />
                 <Route exact path="/" component={() => <Home />} />
               

@@ -2,9 +2,6 @@ import React from "react";
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from "./userContext";
 import { useHistory } from "react-router-dom";
-// import { Button } from "react-bootstrap";
-import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
-import { v4 as uuid } from 'uuid';
 
 const Register = () =>{   
 
@@ -12,85 +9,81 @@ const Register = () =>{
   const [formErrors, setFormErrors] = useState({});
   const [formValues, setFormValues] = useState(""); 
   const [isSubmit, setIsSubmit] = useState(false); 
+  let [errorMessage,setErrorMessage] = useState("")
 
-let customerId = Math.floor(Math.random() * 1000+1)
+  let customerId = Math.floor(Math.random() * 1000+1) 
   
-const { setUserId, setUserName } = useContext(UserContext);
-const {userId, userName} = useContext(UserContext);
+  const { setUserId, setUserName } = useContext(UserContext);
+  const {userId, userName} = useContext(UserContext);
 
-const initialState = {customerId:userId,customerName:userName}
-const [user,setUser] = useState(initialState);
-
-let [errorMessage,setErrorMessage] = useState("")
+  const initialState = {customerId:userId,customerName:userName}
+  const [user,setUser] = useState(initialState);
 
 
-const handleLogin = () => {
-  setUserId(user.customerId);
-  setUserName(user.customerName);
-}
+  const handleLogin = () => {
+    setUserId(user.customerId);
+    setUserName(user.customerName);
+  }
 
-useEffect(()=>{
-  handleLogin();
-  console.log('User was updated')
-},[user])
+  useEffect(()=>{
+    handleLogin();
+  },[user])
 
-const handleSubmit2 = (e) => {
-  e.preventDefault();
-  setFormErrors(validate(formValues));
-  setIsSubmit(true);
-  let customerName = formValues.firstName +" "+ formValues.lastName;
-  // let data = {customerId, ...formValues} 
-  let customerEmail = formValues.email
-  let data = {customerId, customerName, customerEmail}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+    let customerName = formValues.firstName +" "+ formValues.lastName;
+    let customerEmail = formValues.email
+    let data = {customerId, customerName, customerEmail}
 
 
-  fetch(`http://localhost:9000/customers`,{
-    method: 'POST',
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(data)
-  })
-  .then((res)=>{ //does not work for login if you are already registered
-    if(res.status >= 400) {
-      setErrorMessage("User is already registered. Please type in something else.")
-      throw new Error("Server responds with error!")
-    }
-    console.log('new customer added', JSON.stringify(formValues))
-    setUser({customerId,customerName})
-    setIsSubmit(false);
-    createBasket(customerId)
-  })
-  
-}
+    fetch(`http://localhost:9000/customers`,{
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+    })
+    .then((res)=>{ //does not work for login if you are already registered
+      if(res.status >= 400) {
+        setErrorMessage("User is already registered. Please type in something else.")
+        throw new Error("Server responds with error!")
+      }
+      setUser({customerId,customerName})
+      console.log('New customer was successfully created: ', JSON.stringify(formValues))
+      setIsSubmit(false);
+      createBasket(customerId)
+    })
+    
+  }
 
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormValues({ ...formValues, [name]: value });
     };
-    
 
     const createBasket = (userId) => {
       const basket = {customerId: userId, products:[]}
-      console.log(JSON.stringify(basket))
 
       fetch(`http://localhost:9000/baskets`,{
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(basket)
       })
-      .then((res)=>{ //does not work for login if you are already registered
-        console.log(res)
-        console.log("Basket was created")
+      .then((res)=>{
+        console.log("Basket was successfully created")
       })
     }
   
-   
+    function goToHome(){
+      history.push("/");
+    }
    
     useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors]);
+      console.log(formErrors);
+      if (Object.keys(formErrors).length === 0 && isSubmit) {
+        console.log(formValues);
+      }
+    }, [formErrors]);
 
     const validate = (values) => {
       const errors = {};
@@ -114,14 +107,10 @@ const handleSubmit2 = (e) => {
       return errors; 
     };
   
-    function goToHome(){
-      history.push("/");
-    }
-
     return (
       <div className="container">
     
-        <form onSubmit={handleSubmit2}>
+        <form onSubmit={handleSubmit}>
           <h1 className="headline">Registration</h1>
           <div className="ui divider"></div>
           <div className="ui form">

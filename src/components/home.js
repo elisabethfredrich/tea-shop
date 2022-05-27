@@ -1,19 +1,17 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Link, useHistory } from "react-router-dom";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
 import React from "react"
-import { useState, useEffect, useContext } from 'react';
+import { useHistory } from "react-router-dom";
+import { Carousel } from "react-responsive-carousel";
+import { useContext } from 'react';
 import { UserContext } from "./userContext";
 
 const Home = () => {
-  const user = React.useContext(UserContext);  
-
+  const user = useContext(UserContext);  
   const history = useHistory();
+
   const images = [
     {
       greeting1: "Welcome stranger!",
-      greeting2: "Welcome old friend, " + user.userName +" :)",
+      greeting2: "Welcome old friend, " + (user.userId === undefined ? "" : user.userName.split(" ")[0]) +" :)",
       img: "img/pouring_tea.jpg",
       id: 1
     },
@@ -39,9 +37,9 @@ const Home = () => {
       
     }
   ];
-  return (
-    <div className="App">
 
+  return (
+    <div>
         <Carousel autoPlay infiniteLoop showArrows={true} showThumbs={false}>
           {images.map((item) => (
             <div key={item.id}
@@ -59,8 +57,6 @@ const Home = () => {
         </Carousel>
     </div>
   );
-
-
 }
 
 

@@ -5,6 +5,8 @@ import { Nav, Navbar } from "react-bootstrap";
 
 const NavigationBar = () => {
   const [apiResponse, setState] = useState([]);
+  const initialState = apiResponse;
+  const [categoriesList, setList] = useState(initialState);
 
 const callAPI = () => {
   fetch("http://localhost:9000/productCategories", {
@@ -25,11 +27,6 @@ const callAPI = () => {
     setList(apiResponse);
   },[apiResponse])
 
-
-  const initialState = apiResponse;
-  const [categoriesList, setList] = useState(initialState);
-
-
   return(
     <div id="nav-container">
       <div id="logo-top-container"><Link className="navbar-brand-top" to="/">
@@ -37,34 +34,30 @@ const callAPI = () => {
         </Link></div>
       <Navbar collapseOnSelect expand="lg" variant="light">
 
-        <Link className="navbar-brand-logo" to="/">
+          <Link className="navbar-brand-logo" to="/">
               <img src="/img/Logo.png" alt="logo"/>
-        </Link>
+          </Link>
           
           <Navbar.Toggle type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             
-              <ul className="navbar-nav mr-auto">
-
-          {categoriesList.map((category)=>(
-                <li className="nav-item" key={category.categoryName}>
-                  {/* The following to={...} defines the path for each category menu button. Right now it will be /white, /black and so on */}
-                
-                <Link className="nav-link" activeclassname="active" to={`/${category.categoryName.replaceAll(" Teas","").replaceAll(" Tea", "")}`}>
-                  {category.categoryName} 
-                </Link>
-              </li>
-          ))}
-        </ul>
-              <Nav className="me-auto">
-                <Link className="Login" to="/login">
-                  <img src="/img/icons/profile.png" alt="login"/></Link>
-                <Link className="Basket" to="/basket">
-                  <img src="/img/icons/basket.png" alt="basket"/></Link>
-              </Nav>
-          </Navbar.Collapse>
+          <ul className="navbar-nav mr-auto">
+                {categoriesList.map((category)=>(
+                      <li className="nav-item" key={category.categoryName}>
+                      <Link className="nav-link" activeclassname="active" to={`/${category.categoryName.replaceAll(" Teas","").replaceAll(" Tea", "")}`}>
+                        {category.categoryName} 
+                      </Link>
+                    </li>
+                ))}
+          </ul>
+          <Nav className="me-auto">
+            <Link className="Login" to="/login">
+              <img src="/img/icons/profile.png" alt="login"/></Link>
+            <Link className="Basket" to="/basket">
+              <img src="/img/icons/basket.png" alt="basket"/></Link>
+        </Nav>
+        </Navbar.Collapse>
       </Navbar>
       </div>
-// </div>
     )}
 export default NavigationBar;

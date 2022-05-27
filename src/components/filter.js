@@ -1,20 +1,17 @@
 import React from "react";
-import { Button } from "react-bootstrap";
-import { useState } from 'react';
-
 
 const Filter = ({handler}) => {  
   const FilterButton = ({filter}) => {
-    
     return (
       <button className="btn btn-1" onClick={ () => handler(`${filter}`)} >{filter}</button>
     )
   }
+
   const FilterOption = ({filter}) => {
     return (
       <option className="btn" value={`${filter}`}>
             {filter}
-          </option>
+      </option>
     )
   }
 

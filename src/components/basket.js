@@ -1,13 +1,14 @@
 import React from "react";
 import BasketItem from './basketItem';
 import { UserContext } from "./userContext";
-
 import { useState, useContext, useEffect} from 'react';
 
 const Basket = () => {
 
-  const user = React.useContext(UserContext);  
+  const user = useContext(UserContext);  
   const [apiResponse, setState] = useState([]);
+  const initialState = apiResponse;
+  const [basketProductsList, setList] = useState(initialState);
 
   const callAPI = () => {
     if(user.userId === undefined){
@@ -16,9 +17,6 @@ const Basket = () => {
     }
 
     if(user.userId !== undefined){
-   
-    console.log("userid:"+user.customerId)
-
     fetch(`http://localhost:9000/baskets/${user.userId}/products`, {
       method: "GET",
       headers: {"Content-Type": "application/json"},
@@ -26,18 +24,12 @@ const Basket = () => {
     })
       .then(res => res.json())
       .then(res => setState(res))
-      .then(
-      console.log("api response: "+apiResponse));
     ;
 }}
 
   useEffect(() => {
     callAPI();
   }, [])
-
-  
-  const initialState = apiResponse;
-  const [basketProductsList, setList] = useState(initialState);
 
   useEffect(()=>{
     setList(apiResponse);
@@ -68,8 +60,6 @@ const Basket = () => {
       <h1>Total price: {basketProductsList.reduce((prev,product) => prev + parseInt(product.product.price.replaceAll(" dkk",""))*product.amount,0)} dkk</h1>
       </div>
       </div>
-
-
       </div>
       </div>
     )

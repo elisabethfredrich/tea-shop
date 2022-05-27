@@ -1,27 +1,40 @@
 import React from "react";
 import { useState, useEffect, useContext } from 'react';
-import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-
 import { UserContext } from "./userContext";
 
 const Login = () =>{
+    const history = useHistory();
 
     const [formValueslogin, setFormValueslogin] = useState("");
     const [formErrorslogin, setFormErrorslogin] = useState({});
-    const [isLoginSubmit, setLoginIsSubmit] = useState(false); 
 
+    const user = useContext(UserContext);
 
-  const user = useContext(UserContext);
+    const HandleSubmitLogin = (e) => {
+      e.preventDefault();
+      setFormErrorslogin(validate(formValueslogin));
+      callAPI();
+    }
+
+    function goToRegister(){
+      history.push("/register");
+    }
+
+    function goToHome(){
+      history.push("/");
+    }
 
     const handleLoginChange = (e) =>{
          const { name, value } = e.target;
          setFormValueslogin({ ...formValueslogin, [name]: value });
       }
-      const handleLogout = () => {
-        user.setUserId(undefined);
-        user.setUserName(undefined);
-      }
+
+    const handleLogout = () => {
+      user.setUserId(undefined);
+      user.setUserName(undefined);
+      goToHome();
+    }
       
 
     const callAPI = () =>{
@@ -55,64 +68,42 @@ const Login = () =>{
         }
         return errors; 
       };
-   
-      useEffect(() => {
-        console.log(formErrorslogin);
-        if (Object.keys(formErrorslogin).length === 0 && isLoginSubmit) {
-          console.log(formValueslogin);
-        }
-      }, [formErrorslogin]);
-    
-      const history = useHistory();
-
-    
-
-      const HandleSubmitLogin2 = (e) => {
-        e.preventDefault();
-        setFormErrorslogin(validate(formValueslogin));
-        setLoginIsSubmit(true);
-        callAPI();
-      }
-
-      function goToRegister(){
-        history.push("/register");
-      }
   
 
 return (
-<div className="container">
-<form onSubmit={HandleSubmitLogin2}>
-<h1 className="headline">Login here</h1>
-<div className="ui divider"></div>
-<div className="ui form"></div>
-<div className="field">
-  <label>Full name:</label>
-  <input
-    type="text"
-    name="fullName"
-    placeholder="Full name"
-    value={formValueslogin.fullName}
-    onChange={handleLoginChange}
-  />
-</div>
-<p>{formErrorslogin.fullName}</p>
-<div className="field">
-  <label>Email:</label>
-  <input
-    type="email"
-    name="email"
-    placeholder="Email"
-    value={formValueslogin.email}
-    onChange={handleLoginChange}
-  />
-</div>
-<p>{formErrorslogin.email}</p>
-<button className="btn" onClick={HandleSubmitLogin2}>Log in</button>
-</form>
-<button className="btn" onClick={handleLogout}>Log out</button>
-<button className="btn" onClick={goToRegister}>Register here</button>
-</div>
-);
+      <div className="container">
+      <form onSubmit={HandleSubmitLogin}>
+            <h1 className="headline">Login here</h1>
+            <div className="ui divider"></div>
+            <div className="ui form"></div>
+            <div className="field">
+              <label>Full name:</label>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Full name"
+                value={formValueslogin.fullName}
+                onChange={handleLoginChange}
+              />
+            </div>
+            <p>{formErrorslogin.fullName}</p>
+            <div className="field">
+              <label>Email:</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formValueslogin.email}
+                onChange={handleLoginChange}
+              />
+            </div>
+            <p>{formErrorslogin.email}</p>
+            <button className="btn" onClick={HandleSubmitLogin}>Log in</button>
+      </form>
+      <button className="btn" onClick={handleLogout}>Log out</button>
+      <button className="btn" onClick={goToRegister}>Register here</button>
+      </div>
+  );
 
 }
 
