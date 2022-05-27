@@ -50,11 +50,15 @@ const callAPI = () => {
                     </li>
                 ))}
           </ul>
-          <Nav className="me-auto">
-            <Link className="Login" to="/login">
-              <img src="/img/icons/profile.png" alt="login"/></Link>
-            <Link className="Basket" to="/basket">
-              <img src="/img/icons/basket.png" alt="basket"/></Link>
+          <Nav className="icons-nav">
+              <div class="Login">
+                <Link className="Login" to="/login">
+                  <img src="/img/icons/profile.png" alt="login"/></Link>
+                  </div>
+                  <div class="Basket">
+                <Link className="Basket" to="/basket">
+                  <img src="/img/icons/basket.png" alt="basket"/></Link>
+                  </div>
         </Nav>
         </Navbar.Collapse>
       </Navbar>
