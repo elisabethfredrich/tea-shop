@@ -12,22 +12,8 @@ const Register = () =>{
   let [errorMessage,setErrorMessage] = useState("")
 
   let customerId = Math.floor(Math.random() * 1000+1) 
-  
-  const { setUserId, setUserName } = useContext(UserContext);
-  const {userId, userName} = useContext(UserContext);
 
-  const initialState = {customerId:userId,customerName:userName}
-  const [user,setUser] = useState(initialState);
-
-
-  const handleLogin = () => {
-    setUserId(user.customerId);
-    setUserName(user.customerName);
-  }
-
-  useEffect(()=>{
-    handleLogin();
-  },[user])
+  const user = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,10 +44,12 @@ const Register = () =>{
         setErrorMessage("User is already registered. Please type in something else.")
         throw new Error("Server responds with error!")
       }
-      setUser({customerId,customerName})
+      user.setUserId(customerId);
+      user.setUserName(customerName);
       console.log('New customer was successfully created: ', JSON.stringify(formValues))
       setIsSubmit(false);
       createBasket(customerId);
+      goToHome();
     })
     
   }
@@ -87,14 +75,6 @@ const Register = () =>{
     function goToHome(){
       history.push("/");
     }
-   
-    // useEffect(() => {
-    //   console.log(formErrors);
-    //   if (Object.keys(formErrors).length === 0 && isSubmit) {
-    //     console.log("hej katrine")
-    //     console.log(formValues);
-    //   }
-    // }, [formErrors]);
 
     const validate = (values) => {
       const errors = {};
