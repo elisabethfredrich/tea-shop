@@ -13,7 +13,16 @@ const Login = () =>{
 
     const HandleSubmitLogin = (e) => {
       e.preventDefault();
-      setFormErrorslogin(validate(formValueslogin));
+
+      // validate the entered values - do not call api if not valid
+      let errors = validate(formValueslogin)
+      setFormErrorslogin(errors);
+      let noErrors = errors.fullName === undefined && errors.email === undefined
+      if(!noErrors){
+        console.log("There was an error with the entered values.")
+        return;
+      }
+
       callAPI();
     }
 
@@ -58,9 +67,9 @@ const Login = () =>{
         const regexNames = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
         const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
         if (!values.fullName) {
-          errors.firstName = "First name is required!";
+          errors.fullName = "Full name is required!";
         }else if (!regexNames.test(values.fullName)){
-            errors.firstName ="This is not a valid name";
+            errors.fullName ="This is not a valid name";
         }if (!values.email) {
           errors.email = "Email is required!";
         } else if (!regexEmail.test(values.email)) {

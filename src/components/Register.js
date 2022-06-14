@@ -31,7 +31,17 @@ const Register = () =>{
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
+
+    // validate the entered values - do not call api if not valid
+    let errors = validate(formValues)
+    setFormErrors(errors);
+    let noErrors = errors.firstName === undefined && errors.lastName === undefined && errors.email === undefined
+    if(!noErrors){
+      console.log("There was an error with the entered values.")
+      return;
+    }
+
+
     setIsSubmit(true);
     let customerName = formValues.firstName +" "+ formValues.lastName;
     let customerEmail = formValues.email
@@ -51,7 +61,7 @@ const Register = () =>{
       setUser({customerId,customerName})
       console.log('New customer was successfully created: ', JSON.stringify(formValues))
       setIsSubmit(false);
-      createBasket(customerId)
+      createBasket(customerId);
     })
     
   }
@@ -78,12 +88,13 @@ const Register = () =>{
       history.push("/");
     }
    
-    useEffect(() => {
-      console.log(formErrors);
-      if (Object.keys(formErrors).length === 0 && isSubmit) {
-        console.log(formValues);
-      }
-    }, [formErrors]);
+    // useEffect(() => {
+    //   console.log(formErrors);
+    //   if (Object.keys(formErrors).length === 0 && isSubmit) {
+    //     console.log("hej katrine")
+    //     console.log(formValues);
+    //   }
+    // }, [formErrors]);
 
     const validate = (values) => {
       const errors = {};
